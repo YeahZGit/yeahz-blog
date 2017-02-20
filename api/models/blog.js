@@ -1,26 +1,23 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
 var blogSchema = new Schema({
+	title_img: String,
 	title: String,
 	category: String,
 	//key_word: String,
 	content: String,
 	cover_url: {type: String},
-	create_at: {type: Date, default: Date.now()},
-	update_at: {type: Date, default: Date.now()},
+	create_at: {type: Date, default: Date.now},
+	update_at: {type: Date, default: Date.now},
 	//comments: {type: String}
 })
 
-// articleSchema.pre('save',function(next){
-// 	if(this.isNew){
-// 		create_date = update_date = Date.now();
-// 	}
-// 	else{
-// 		update_date = Date.new();
-// 	}
-// })
+blogSchema.pre('save',function(next){	
+	this.update_at = Date.now();
+	next();
+});
 
 blogSchema.statics = {
 	getBlogs: function(query, opt){
