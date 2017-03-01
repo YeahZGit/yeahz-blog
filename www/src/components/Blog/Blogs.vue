@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<!--分页-->
-		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler" :create-url="createUrl"><zpagenav>
+		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler"><zpagenav>
 	</div>
 </template>
 
@@ -60,14 +60,8 @@
 				});
 			},
 			pageHandler: function(page) {
-      	//here you can do custom state update
       	this.page = page;
-      	alert(page)
       	this.paging();
-    	},
-    	createUrl: function(unit) {
-    		//return unit.page > 1?'#page=' + unit.page:'#'
-    		//return '/#/about'
     	}
 		},
 		filters: {
@@ -135,12 +129,8 @@
 	overflow: hidden;
 }
 
-.paging{
+.zpagenav{
 	float: right;
-}
-
-.paging li{
-	display: inline;
 }
 
 @media screen and (max-width: 600px){
