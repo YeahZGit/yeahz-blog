@@ -23,17 +23,7 @@
 			</div>
 		</div>
 		<!--分页-->
-		<div class="paging">
-			<ul class="pagination">
-			    <li><a href="#">&laquo;</a></li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li><a href="#">&raquo;</a></li>
-			</ul>
-		</div>
+		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler" :create-url="createUrl"><zpagenav>
 	</div>
 </template>
 
@@ -44,18 +34,41 @@
 		name: 'blogs',
 		data() {
 			return {
-				blogs: []
+				blogs: [],
+				allBlogs: [],
+				page: 1,
+				pageSize: 4,
+				total: 0
 			}
 		},
 		methods: {
+			paging: function() {
+				var vm = this;
+				vm.blogs = [];
+				for(var i = (vm.page-1)*vm.pageSize, j = 0; j < vm.pageSize && i < vm.total ; i++, j++){
+					vm.blogs[j] = vm.allBlogs[i];
+				}
+			},
 			getBlogs: function() {
 				var vm = this;
 				blogResource.getBlogs().then(function(res){
-					vm.blogs = res.data;
+					vm.allBlogs = res.data;
+					vm.total = res.data.length;
+					vm.paging();
 				}).catch(function(err){
 					alert(err.message);
 				});
-			}
+			},
+			pageHandler: function(page) {
+      	//here you can do custom state update
+      	this.page = page;
+      	alert(page)
+      	this.paging();
+    	},
+    	createUrl: function(unit) {
+    		//return unit.page > 1?'#page=' + unit.page:'#'
+    		//return '/#/about'
+    	}
 		},
 		filters: {
 			timeFilter: function(value){
