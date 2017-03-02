@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
-import zpagenav from 'vue-pagenav'
+import Pagenav from 'vue-pagenav'
 
 import Blogs from './components/Blog/Blogs'
 import Detial from './components/Blog/Detial'
@@ -9,7 +9,7 @@ import About from './components/About/About'
 import NotFound from './components/NotFound/NotFound'
 
 Vue.use(VueRouter)
-Vue.use(zpagenav)
+Vue.use(pagenav)
 
 const routes = [
 	{ path: '/', redirect: '/home' },

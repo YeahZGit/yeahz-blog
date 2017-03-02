@@ -45,7 +45,7 @@
 			paging: function() {
 				var vm = this;
 				vm.blogs = [];
-				for(var i = (vm.page-1)*vm.pageSize, j = 0; j < vm.pageSize && i < vm.total ; i++, j++){
+				for(var i=(vm.page-1)*vm.pageSize, j=0; j<vm.pageSize && i<vm.total; i++, j++){
 					vm.blogs[j] = vm.allBlogs[i];
 				}
 			},
