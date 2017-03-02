@@ -21,25 +21,7 @@
 				</tr>	
 			</tbody>
 		</table>
-		<nav aria-label="Page navigation">
-			<ul class="pagination">
-				<li>
-					<a href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li>
-					<a href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</ul>
-		</nav>
+		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler"><zpagenav>
 	</div>
 </template>
 
@@ -50,14 +32,27 @@
 		name: 'blogs',
 		data() {
 			return {
-				blogs: []
+				blogs: [],
+				allBlogs: [],
+				page: 1,
+				pageSize: 10,
+				total: 0
 			}
 		},
 		methods: {
+			paging: function() {
+				var vm = this;
+				vm.blogs = [];
+				for(var i=(vm.page-1)*vm.pageSize, j=0; j<vm.pageSize && i<vm.total; i++, j++){
+					vm.blogs[j] = vm.allBlogs[i];
+				}
+			},
 			getBlogs: function() {
 				var vm = this;
 				blogResource.getBlogs().then(function(res){
-					vm.blogs = res.data;
+					vm.allBlogs = res.data;
+					vm.total = res.data.length;
+					vm.paging();
 				}).catch(function(err){
 					alert(err.message);
 				});
@@ -69,6 +64,10 @@
 				}).catch(function(err){
 					alert(err.message);
 				});
+			},
+			pageHandler(page) {
+				this.page = page;
+				this.paging();
 			}
 		},
 		filters: {
