@@ -1,35 +1,36 @@
 <template>
 	<div class="detial">
-		<div class="detial-blog-list">
-			<div class="detial-title-img">
-				<img :src="blog.title_img"/>
-			</div>
-			<div class="detial-blog-content">
-			  <h4 class="detial-blog-title">{{blog.title}}</h4>
-				<div class="detial-blog-infor">
-				    <em class="detial-tag">
-				        <span class="glyphicon glyphicon-tag"></span>
-				        <span>{{blog.category}}</span>
-				    </em>
-				    <em>
-				        <span class="glyphicon glyphicon-calendar"></span>
-				        <span>{{blog.update_at | timeFilter}}</span> 
-				    </em>
+		<transition name="list" tag="div">
+			<div class="detial-blog-list" :key="blog.title_img">
+				<div class="detial-title-img">
+					<img :src="blog.title_img"/>
 				</div>
-			  <p class="detial-paragraph" v-html="blog.content"></p>
-			  <router-link to='/home' class="detial-back-home">
-			  	<span class="glyphicon glyphicon-share-alt"></span>
-			  	<span>返回首页</span>
-			  </router-link>
+				<div class="detial-blog-content" :key="blog.title">
+					<h4 class="detial-blog-title">{{blog.title}}</h4>
+					<div class="detial-blog-infor">
+						<em class="detial-tag">
+							<span class="glyphicon glyphicon-tag"></span>
+							<span>{{blog.category}}</span>
+						</em>
+						<em>
+							<span class="glyphicon glyphicon-calendar"></span>
+							<span>{{blog.create_at | timeFilter}}</span> 
+						</em>
+					</div>
+					<p class="detial-paragraph" v-html="blog.content"></p>
+					<router-link to='/home' class="detial-back-home">
+						<span class="glyphicon glyphicon-share-alt"></span>
+						<span>返回首页</span>
+					</router-link>
+				</div>
 			</div>
-		</div>
+		</transition>
 	</div>
 </template>
 
 <script>
 	import blogResource from '../../factories/blogs';
 	import Filters from '../../utils/filters';
-
 
 	export default{
 		name: 'detial',

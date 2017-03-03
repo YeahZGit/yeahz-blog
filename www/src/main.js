@@ -9,11 +9,11 @@ import About from './components/About/About'
 import NotFound from './components/NotFound/NotFound'
 
 Vue.use(VueRouter)
-Vue.use(pagenav)
+Vue.use(Pagenav)
 
 const routes = [
 	{ path: '/', redirect: '/home' },
-	{ path: '/home', component: Blogs },
+	{ path: '/home', component: Blogs},
 	{ path: '/blogs/:blogId', component: Detial },
 	{ path: '/about', component: About },
 	{ path: '/*', component: NotFound }

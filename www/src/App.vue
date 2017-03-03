@@ -22,16 +22,17 @@
     </div>
     <!--主体-->
     <div class="back">
+
       <div class="main">
         <div class="list">
-          <!-- <div class="block">
-            <h5>排行</h5>
+          <div class="block">
+            <h5>小玩具</h5>
             <ul>
               <li><a href="#">123</a></li>
               <li><a href="#">234</a></li>
               <li><a href="#">345</a></li>
             </ul>
-          </div> -->
+          </div>
           <div class="block">
             <h5>链接</h5>
             <ul>
@@ -93,6 +94,14 @@
 @font-face{
   font-family:showcard;
   src: url(./styles/15438025.ttf);
+}
+/*vue transition*/
+.list-enter-active{
+  transition: transform 1s;
+}
+
+.list-enter{
+  transform: translateY(50px);
 }
 
 body{
@@ -252,7 +261,7 @@ body{
 }
 
 .include{
-  padding-top: 20px;
+  padding-top: 10px;
   width: 95%; 
   margin: 0px auto;
 }
