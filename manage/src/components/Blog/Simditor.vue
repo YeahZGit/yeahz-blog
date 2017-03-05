@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 import Simditor from 'simditor'
 export default {
   props: ['value'],
