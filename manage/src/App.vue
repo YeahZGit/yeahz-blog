@@ -33,7 +33,7 @@
 <style>
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 body{
-	font-family: '微软雅黑';
+	font-family: 'Microsoft YaHei';
 }
 
 .header-box{
