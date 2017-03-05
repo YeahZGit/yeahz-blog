@@ -28,9 +28,7 @@
           <div class="block">
             <h5>小玩具</h5>
             <ul>
-              <li><a href="#">123</a></li>
-              <li><a href="#">234</a></li>
-              <li><a href="#">345</a></li>
+              <li><a href="./keyboard">键盘侠</a></li>
             </ul>
           </div>
           <div class="block">
@@ -107,7 +105,7 @@
 body{
   margin: 0px;
   padding: 0px;
-  font-family: '微软雅黑';
+  font-family:  'Microsoft YaHei';
 }
 
 .nav{
