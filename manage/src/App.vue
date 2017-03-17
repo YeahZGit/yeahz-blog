@@ -21,12 +21,7 @@
 
 <script>
   export default{
-    name: 'app',
-    created() {
-    	if(!window.sessionStorage.getItem('token')){
-    		window.location.href = '#/login';
-    	}
-    }
+    name: 'app'
   }
 </script>
 	
