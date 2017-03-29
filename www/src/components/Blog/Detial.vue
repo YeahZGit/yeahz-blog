@@ -87,7 +87,6 @@
 }
 
 .detial-blog-content img{
-	width: 100%;
 	height: auto;
 	border-radius: 2px;
 }
@@ -127,4 +126,9 @@ a.detial-back-home{
 	text-decoration: none;
 }
 
+@media screen and (max-width: 600px){
+	.detial-blog-content img{
+		width: 100%;
+	}
+}
 </style>

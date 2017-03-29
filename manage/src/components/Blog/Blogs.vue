@@ -21,7 +21,7 @@
 				</tr>	
 			</tbody>
 		</table>
-		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler"><zpagenav>
+		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler"></zpagenav>
 	</div>
 </template>
 

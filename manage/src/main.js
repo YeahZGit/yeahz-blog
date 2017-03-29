@@ -8,6 +8,7 @@ import Blogs from './components/Blog/Blogs'
 import Edit from './components/Blog/Edit'
 import NotFound from './components/NotFound/NotFound'
 
+
 Vue.use(VueRouter)
 Vue.use(Pagenav)
 const routes = [
@@ -20,7 +21,16 @@ const routes = [
 ]
 
 const router = new VueRouter({
+	mode: 'history',
+	//saveScrollPosition: true,
 	routes
+})
+
+router.beforeEach(({path}, from, next) => {
+	if(!window.sessionStorage.getItem('token') && path !== '/login'){
+		return next({path: '/login'})
+	}
+  next()
 })
 
 new Vue({

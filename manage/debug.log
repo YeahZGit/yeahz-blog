@@ -7,3 +7,5 @@
 [0212/173930:WARNING:in_range_cast.h(38)] value 2492080328446 out of range
 [0212/173930:WARNING:in_range_cast.h(38)] value 2492080328660 out of range
 [0212/173930:WARNING:in_range_cast.h(38)] value 2492080332572 out of range
+[0316/214455.427:ERROR:exception_handler_server.cc(524)] ConnectNamedPipe: 管道正在被关闭。 (0xE8)
+[0329/114429.602:ERROR:exception_handler_server.cc(524)] ConnectNamedPipe: 管道正在被关闭。 (0xE8)

@@ -12,7 +12,7 @@ Vue.use(VueRouter)
 Vue.use(Pagenav)
 
 const routes = [
-	{ path: '/', redirect: '/home' },
+	{ path: '/', component: Blogs},
 	{ path: '/home', component: Blogs},
 	{ path: '/blogs/:blogId', component: Detial },
 	{ path: '/about', component: About },
