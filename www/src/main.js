@@ -3,10 +3,13 @@ import App from './App'
 import VueRouter from 'vue-router'
 import Pagenav from 'vue-pagenav'
 
-import Blogs from './components/Blog/Blogs'
-import Detial from './components/Blog/Detial'
-import About from './components/About/About'
-import NotFound from './components/NotFound/NotFound'
+import Blogs from './components/blog/blogs'
+import Detial from './components/blog/detial'
+import Category from './components/category/category'
+import Tag from './components/tag/tag'
+import Pigeonhole from './components/pigeonhole/pigeonhole'
+import About from './components/about/about'
+import NotFound from './components/notFound/notFound'
 
 Vue.use(VueRouter)
 Vue.use(Pagenav)
@@ -16,6 +19,9 @@ const routes = [
 	{ path: '/home', component: Blogs},
 	{ path: '/blogs/:blogId', component: Detial },
 	{ path: '/about', component: About },
+	{ path: '/category', component: Category },
+	{ path: '/tag', component: Tag },
+	{ path: '/pigeonhole', component: Pigeonhole },
 	{ path: '/*', component: NotFound }
 ]
 

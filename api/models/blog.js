@@ -6,7 +6,7 @@ var blogSchema = new Schema({
 	title_img: String,
 	title: String,
 	category: String,
-	//key_word: String,
+	tag: String,
 	content: String,
 	cover_url: {type: String},
 	create_at: {type: Date, default: Date.now},

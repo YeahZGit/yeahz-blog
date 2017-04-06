@@ -1,34 +1,30 @@
 <template>
 	<div>
-		<transition-group	name="list" tag="div">
-			<div class="blog-list" v-for="blog in blogs" :key="blog._id">
-				<div class="title-img">
-					<img :src="blog.title_img"/>
-				</div>
-				<div class="blog-content">
-				  <h4 class="blog-title">{{blog.title}}</h4>
-					<div class="blog-infor">
-					    <em class="tag">
-					        <span class="glyphicon glyphicon-tag"></span>
-					        <span>{{blog.category}}</span>
-					    </em>
-					    <em>
-					        <span class="glyphicon glyphicon-calendar"></span>
-					        <span>{{blog.create_at | timeFilter}}</span> 
-					    </em>
-					</div>
-				    <p class="paragraph">
-				    	{{blog.content | lengthFilter(90)}}
-				    	<router-link :to="'/blogs/' + blog._id" class="show-all">查看原文</router-link>
-				    </p>
-				</div>
+		<div class="blog-list" v-for="blog in blogs" :key="blog._id">
+			<div class="title-img">
+				<img :src="blog.title_img"/>
 			</div>
-		</transition-group>
+			<div class="blog-content">
+				<h4 class="blog-title">{{blog.title}}</h4>
+				<div class="blog-infor">
+					<em class="tag">
+						<span class="glyphicon glyphicon-tag"></span>
+						<span>{{blog.category}}</span>
+					</em>
+					<em>
+						<span class="glyphicon glyphicon-calendar"></span>
+						<span>{{blog.create_at | timeFilter}}</span> 
+					</em>
+				</div>
+				<p class="paragraph">
+					{{blog.content | lengthFilter(90)}}
+					<router-link :to="'/blogs/' + blog._id" class="show-all">查看原文</router-link>
+				</p>
+			</div>
+		</div>
 		<!--分页-->
-		<transition name="list">
-			<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler" :key="page"><zpagenav>
-		</transition>
-	</div>
+		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler" :key="page"><zpagenav>
+		</div>
 </template>
 
 <script>

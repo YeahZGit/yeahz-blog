@@ -1,6 +1,8 @@
 var router = require('express').Router();
 var adminController = require('./admin');
 var blogController = require('./blog');
+var categoryController = require('./category');
+var tagController = require('./tag');
 var uploadController = require('./upload');
 var multer = require('multer');
 var auth = require('../middlewares/auth');
@@ -16,6 +18,14 @@ router.route('/blogs/:blogId')
 	.get(blogController.getBlog)
 	.put(auth.adminRequired, blogController.updateBlog)
 	.delete(auth.adminRequired, blogController.deleteBlog)
+	.all(() => {throw new HttpError.MethodNotAllowedError()});
+
+router.route('/category')
+	.get(categoryController.getAllCategory)
+	.all(() => {throw new HttpError.MethodNotAllowedError()});
+
+router.route('/tag')
+	.get(tagContorller.getAllTags)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/uploads/pictures')

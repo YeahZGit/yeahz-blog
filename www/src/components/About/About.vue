@@ -12,6 +12,10 @@
 </script>
 
 <style>
+	.about{
+		margin-bottom: 50px; 
+	}
+	
 	.about p{
 		line-height: 2;
 	}

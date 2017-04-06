@@ -7,6 +7,9 @@
         <div class="nav-link">
           <ul>
             <li><router-link to='/home'>首页</router-link></li>
+            <li><router-link to='/category'>分类</router-link></li>
+            <li><router-link to='/tag'>标签</router-link></li>
+            <li><router-link to='/pigeonhole'>归档</router-link></li>
             <li><router-link to='/about'>关于</router-link></li>
           </ul>
         </div>
@@ -42,7 +45,9 @@
         </div>
         <div class="content">
           <div class="include">
-            <router-view></router-view>
+            <transition name='page'>
+              <router-view></router-view>
+            </transition>
           </div>  
         </div>
       </div>
@@ -94,11 +99,11 @@
   src: url(./styles/15438025.ttf);
 }
 /*vue transition*/
-.list-enter-active{
+.page-enter-active{
   transition: transform 1s;
 }
 
-.list-enter{
+.page-enter{
   transform: translateY(50px);
 }
 
@@ -116,7 +121,6 @@ body{
   position: fixed;
   z-index: 10;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -124,7 +128,10 @@ body{
   max-width: 900px;
   min-width: 350px;
   color: white;
-  margin-top: 5px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .logo{
@@ -144,18 +151,19 @@ body{
 
 .nav-link li{
   display: inline;
-  margin-right: 20px;
+  margin-right: 15px;
 }
 
 .nav-link li a{
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
 }
 
 .search{
-  float: right;
   overflow: hidden;
+  position: absolute;
+  right: 15px;
 } 
 
 .search-text{
@@ -280,7 +288,7 @@ body{
 .footercontent{
   font-size: 16px;
   max-width: 700px;
-  color: #34495e;
+  color: #bdc3c7;
 }
 
 @media screen and (max-width: 920px){

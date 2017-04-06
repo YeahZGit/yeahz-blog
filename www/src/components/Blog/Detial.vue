@@ -1,30 +1,28 @@
 <template>
 	<div class="detial">
-		<transition name="list" tag="div">
-			<div class="detial-blog-list" :key="blog.title_img">
-				<div class="detial-title-img">
-					<img :src="blog.title_img"/>
-				</div>
-				<div class="detial-blog-content" :key="blog.title">
-					<h4 class="detial-blog-title">{{blog.title}}</h4>
-					<div class="detial-blog-infor">
-						<em class="detial-tag">
-							<span class="glyphicon glyphicon-tag"></span>
-							<span>{{blog.category}}</span>
-						</em>
-						<em>
-							<span class="glyphicon glyphicon-calendar"></span>
-							<span>{{blog.create_at | timeFilter}}</span> 
-						</em>
-					</div>
-					<p class="detial-paragraph" v-html="blog.content"></p>
-					<router-link to='/home' class="detial-back-home">
-						<span class="glyphicon glyphicon-share-alt"></span>
-						<span>返回首页</span>
-					</router-link>
-				</div>
+		<div class="detial-blog-list" :key="blog.title_img">
+			<div class="detial-title-img">
+				<img :src="blog.title_img"/>
 			</div>
-		</transition>
+			<div class="detial-blog-content" :key="blog.title">
+				<h4 class="detial-blog-title">{{blog.title}}</h4>
+				<div class="detial-blog-infor">
+					<em class="detial-tag">
+						<span class="glyphicon glyphicon-tag"></span>
+						<span>{{blog.category}}</span>
+					</em>
+					<em>
+						<span class="glyphicon glyphicon-calendar"></span>
+						<span>{{blog.create_at | timeFilter}}</span> 
+					</em>
+				</div>
+				<p class="detial-paragraph" v-html="blog.content"></p>
+				<router-link to='/home' class="detial-back-home">
+					<span class="glyphicon glyphicon-share-alt"></span>
+					<span>返回首页</span>
+				</router-link>
+			</div>
+		</div>
 	</div>
 </template>
 
