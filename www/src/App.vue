@@ -357,6 +357,14 @@ body{
 }
 
 @media screen and (max-width: 480px){
+  .main{
+    padding-top: 0px;
+  }
+
+  .footer{
+    top: 0px;
+  }
+
   .nav-link,.search{
     display: none;
   }

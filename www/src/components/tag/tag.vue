@@ -1,22 +1,34 @@
 <template>
 	<div class="article-tag">
-		<h4>{{tags.length}}个标签</h4>
+		<h4>共{{tags.length}}个标签</h4>
 		<div class="tag-box">
-			<router-link v-for="tag in tags" to="" style="'font-size:' + Math.random()*20">{{tag}}</router-link>
+			<router-link v-for="tag in tags" to='/#'>{{tag}}</router-link>
 		</div>
 	</div>
 </template>
 
 <script>
+	import tagResource from '../../factories/tag'
 	export default{
 		name: 'tag',
 		data() {
 			return {
-				tags: ['svn', 'git', 'github','svn', 'git', 'github','svn', 'git', 'github','github','svn', 'git', 'github']
+				tags: []
 			}
 		},
 		methods: {
-
+			getTags: function() {
+				var vm = this;
+				tagResource.getTags().then(res => {
+					vm.tags = res.data;
+					console.log("res.data")
+				}).catch(err => {
+					alert(err.message);
+				})
+			}
+		},
+		created() {
+			return this.getTags();
 		}
 	}
 </script>
