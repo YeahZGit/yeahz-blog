@@ -7,8 +7,9 @@
 			<img v-bind:src="blog.title_img">
 		</div>
 		<div class="blog-title">
-			<input type="text" placeholder="请输入文章标题" v-model.trim="blog.title">
-			<input class="tag" type="text" placeholder="请输入文章标签" v-model="blog.category">
+			<input class="title" type="text" placeholder="请输入文章标题" v-model.trim="blog.title">
+			<input class="category" type="text" placeholder="请输入文章分类" v-model="blog.category">
+			<input class="tag" type="text" placeholder="请输入文章标签" v-model="blog.tag">
 		</div>
 		<div class="blog-content">
 			<simditor @setContent='getContent' :value="blog.content"></simditor>
@@ -27,7 +28,6 @@
 		name: 'edit',
 		data() {
 			return {
-				value1: '',
 				blog: { 
 					title_img: ''
 				}
@@ -162,17 +162,22 @@
 }
 
 .blog-title input{
-	width: 50%;
 	height: 100%;
 	font-weight: 500;
-	font-size: 30px;
 	border: none;
 	outline: none;
 	border-bottom: 1px solid #bdc3c7;
 }
 
-.blog-title .tag{
+.blog-title>.title{
+	width: 50%;
+	font-size: 30px;
+}
+
+.blog-title>.category,.blog-title>.tag{
 	border-left: 1px solid #bdc3c7;
+	width: 25%;
+	font-size: 22px;
 }
 
 .blog-content{
