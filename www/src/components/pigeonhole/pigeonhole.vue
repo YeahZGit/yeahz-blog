@@ -1,27 +1,68 @@
 <template>
 	<div class="pigeonhole">
 		<div class="pigeonhole-list" v-for="year in pigeonholeList">
-			<h3>{{year[0].year}}<span>({{year.length}}篇文章)</span></h3>
+			<h3>{{year[0].year}}<span>( {{year.length}}篇文章 )</span></h3>
 			<article v-for='(blog, index) in year'>
-				<div class="order">{{index+1}}</div>
-				<div class="release-date">{{blog.releaseDate}}</div>
-				<h4 class="article-title"><router-link :to="'/blogs/'"> {{blog.blogTitle}}</router-link></h4>
+				<ul>
+					<li class="order">{{index+1}}</li>
+					<li class="release-date">{{blog.releaseDate | timeFilter}}</li>
+					<li class="article-title"><router-link :to="'/blogs/' + blog._id"> {{blog.title}}</router-link></li>
+				</ul>
+				<div class="decorate" v-if="!((index+1) === year.length)"></div>
 			</article>
 		</div>
 	</div>
 </template>
 
 <script>
+	import pigeonholeResource from '../../factories/pigeonhole';
+	import Filters from '../../utils/filters';
 	export default{
 		name: 'pigeonhole',
 		data() {
 			return {
-				pigeonholeList: [[{year: '2017', releaseDate: '2017-04-06', blogTitle: '关于flex布局'},
-							  {year: '2017', releaseDate: '2017-04-06', blogTitle: '关于flex布局'}],
-							 [{year: '2017', releaseDate: '2017-04-06', blogTitle: '关于flex布局'},
-							  {year: '2017', releaseDate: '2017-04-06', blogTitle: '关于flex布局'}]
-							]
+				pigeonholeList: []
 			}
+		},
+		methods: {
+			dateSort() {
+				var vm = this;
+				pigeonholeResource.getPigeonhole().then(res => {
+					res.data.sort((a, b) => {
+						return new Date(b.releaseDate) - new Date(a.releaseDate)
+					})
+					res.data.forEach(val => {
+						var mask = false;
+						var pigeonholeInfor = {};
+
+						pigeonholeInfor.year = new Date(val.releaseDate).getFullYear();
+						pigeonholeInfor.releaseDate = val.releaseDate;
+						pigeonholeInfor.title = val.title;
+						pigeonholeInfor._id = val._id;
+
+						for(var i = 0; i < vm.pigeonholeList.length; i++){
+							if(pigeonholeInfor.year === vm.pigeonholeList[i][0].year){
+								vm.pigeonholeList[i].push(pigeonholeInfor);
+								mask = true;
+								break;
+							}
+						}
+						if(mask === false){
+							vm.pigeonholeList.push([pigeonholeInfor]);
+						}
+					});
+				}).catch(err => {
+					alert(err.message);
+				})
+			}
+		},
+		filters: {
+			timeFilter: function(value){
+				return Filters.timeFilter(value).substr(0, 10);
+			}
+		},
+		created() {
+			return this.dateSort();
 		}
 	}
 </script>
@@ -38,6 +79,7 @@
 
 .pigeonhole-list h3{
 	font-size: 20px;
+	margin-bottom: 20px;
 	color: rgb(58, 126, 129);
 }
 
@@ -46,21 +88,23 @@
 	font-size: 14px;
 }
 
-.pigeonhole-list h4{
-	font-size: 16px;
+.pigeonhole article{
+	padding-left: 30px;
+}	
+
+.pigeonhole-list ul{
+	padding: 0px;
 	margin: 0px;
 }
 
-.pigeonhole-list h4 a{
-	color: rgb(58, 126, 129);
+.pigeonhole-list ul li{
+	display: inline-block;
+	text-decoration: none;
 }
 
-.pigeonhole article{
-	margin-top: 25px;
-	padding-left: 30px;
-	display: flex;
-	flex-direction: row;
-}	
+.pigeonhole-list ul a{
+	color: rgb(58, 126, 129);
+}
 
 .order{
 	width: 20px;
@@ -68,11 +112,17 @@
 	color: white;
 	border-radius: 20px;
 	text-align: center;
-	margin-right: 30px;
 	background: #9ed7da;
 }
 
 .release-date{
 	margin-right: 10px;
+}
+
+.decorate{
+	background: #9ed7da;
+	height: 25px;
+	width: 2px;
+	margin: 1px 0px 1px 8px;
 }
 </style>

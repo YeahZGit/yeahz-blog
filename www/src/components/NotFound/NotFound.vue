@@ -1,6 +1,8 @@
 <template>
 	<div class="not-found">
-		Error 404 :( 访问的页面不存在 ... 
+		<div>
+			<img src="../../assets/404.png">
+		</div>
 	</div>
 </template>
 
@@ -11,11 +13,12 @@
 </script>
 
 <style>
-	.not-found{
-		display: flex;
-		height: 300px;
-		padding-left: 10px;
-	  font-size: 20px;
-	  color: #95a5a6;
+	.not-found div{
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	.not-found img{
+		width: 100%;
 	}
 </style>

@@ -1,11 +1,14 @@
 <template>
 	<div class="category">
 		<div class="category-list" v-for="category in categoryList">
-			<h3>{{category[0].category}}<span>({{category.length}}篇文章)</span></h3>
+			<h3>{{category[0].category}}<span>( {{category.length}}篇文章 )</span></h3>
 			<article v-for='(blog, index) in category'>
-				<div class="order">{{index+1}}</div>
-				<div class="release-date">{{blog.releaseDate | timeFilter}}</div>
-				<h4 class="article-title"><router-link :to="'/blogs/' + blog._id"> {{blog.title}}</router-link></h4>
+				<ul>
+					<li class="order">{{index+1}}</li>
+					<li class="release-date">{{blog.releaseDate | timeFilter}}</li>
+					<li class="article-title"><router-link :to="'/blogs/' + blog._id"> {{blog.title}}</router-link></li>
+				</ul>
+				<div class="decorate" v-if="!((index+1) === category.length)"></div>
 			</article>
 		</div>
 	</div>
@@ -54,6 +57,7 @@
 
 .category-list h3{
 	font-size: 20px;
+	margin-bottom: 20px;
 	color: rgb(58, 126, 129);
 }
 
@@ -62,21 +66,23 @@
 	font-size: 14px;
 }
 
-.category-list h4{
-	font-size: 16px;
+.category article{
+	padding-left: 30px;
+}	
+
+.category-list ul{
+	padding: 0px;
 	margin: 0px;
 }
 
-.category-list h4 a{
-	color: rgb(58, 126, 129);
+.category-list ul li{
+	display: inline-block;
+	text-decoration: none;
 }
 
-.category article{
-	margin-top: 25px;
-	padding-left: 30px;
-	display: flex;
-	flex-direction: row;
-}	
+.category-list ul a{
+	color: rgb(58, 126, 129);
+}
 
 .order{
 	width: 20px;
@@ -84,11 +90,17 @@
 	color: white;
 	border-radius: 20px;
 	text-align: center;
-	margin-right: 30px;
 	background: #9ed7da;
 }
 
 .release-date{
-	margin-right: 10px;
+	margin: 0px 10px;
+}
+
+.decorate{
+	background: #9ed7da;
+	height: 25px;
+	width: 2px;
+	margin: 1px 0px 1px 8px;
 }
 </style>

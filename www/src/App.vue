@@ -13,19 +13,37 @@
             <li><router-link to='/about'>关于</router-link></li>
           </ul>
         </div>
+        <!--搜索框-->
         <div class="search">
           <input placeholder="输入搜索词" name="word" v-model="word" autocomplete="off" :style="'right:'+right" class="search-text">
           <a :href="'https:www.baidu.com/s?word=' + word + ' site:[yeahz.cn]'" target="_blank" class="baidu-link" :style="'z-index:'+zIndex">搜</a>  
           <span class="glyphicon glyphicon-search" @click="openSearch"></span>
         </div>
+        <!--下拉菜单按钮-->
+        <div class="menu" @click="dropdown()">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
       </div>
     </nav>
+    <!--下拉菜单-->
+    <transition name="drop">
+      <div class="drop-nav-box" v-if='showDropNav'>
+        <div class="drop-nav">
+          <router-link to='/home'>首页</router-link>
+          <router-link to='/category'>分类</router-link>
+          <router-link to='/tag'>标签</router-link>
+          <router-link to='/pigeonhole'>归档</router-link>
+          <router-link to='/about'>关于</router-link>
+        </div>
+      </div>
+    </transition>
+    
+    <!--背景图片-->
     <div class="back-img">
       <div><img src="./pictures/city.gif"></div>
     </div>
     <!--主体-->
     <div class="back">
-
       <div class="main">
         <div class="list">
           <div class="block">
@@ -68,6 +86,7 @@
     name: 'app',
     data() {
       return {
+        showDropNav: false,
         word: '',
         right: '',
         zIndex: 0,
@@ -75,6 +94,9 @@
       }
     },
     methods: {
+      dropdown: function() {
+        this.showDropNav = !this.showDropNav;
+      },
       openSearch: function(){
         var vm = this;
         vm.right = '0px';
@@ -99,12 +121,18 @@
   src: url(./styles/15438025.ttf);
 }
 /*vue transition*/
+.page-enter,{
+  transform: translateY(50px);
+}
 .page-enter-active{
   transition: transform 1s;
 }
 
-.page-enter{
-  transform: translateY(50px);
+.drop-enter,.drop-leave-active{
+  transform: translateY(-50px);
+}
+.drop-enter-active,.drop-leave-active{
+  transition: transform .5s;
 }
 
 body{
@@ -192,6 +220,34 @@ body{
 
 .search span:hover{
   cursor: pointer;
+}
+
+.menu{
+  display: none;
+}
+
+.drop-nav-box{
+  position: fixed;
+  z-index: 9;
+  top: 60px;
+  width: 100%;
+  height: 50px;
+  background: #5db2b7;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drop-nav{
+  min-width: 350px;
+  padding: 0 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.drop-nav a{
+  color: white;
 }
 
 .back-img{
@@ -301,21 +357,28 @@ body{
 }
 
 @media screen and (max-width: 480px){
-  /*.nav{
-    height: 80px;
-  }
-  .container{
-    display: flex;
-    flex-direction: column;
-  }
-  .nav-link ul{
-    padding: 0px;
-  }*/
-  .search{
+  .nav-link,.search{
     display: none;
-    /*position: absolute;
+  }
+
+  .menu{
+    width: 30px;
+    text-align: center;
+    display: block;
+    font-size: 22px;
+    border: 1px solid #95a5a6;
+    border-radius: 3px;
+    position: absolute;
     right: 20px;
-    top: 8px;*/
+  }
+
+  .menu:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #95a5a6;
+  }
+
+  .menu span{
+    margin-top: 4px;
   }
 }
 </style>
