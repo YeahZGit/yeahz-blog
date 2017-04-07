@@ -5,6 +5,9 @@ var blogController = {};
 
 blogController.getAllBlogs = (req, res, next) =>{
 	Blog.getBlogs({}).then(blogs =>{
+		blogs.sort((a, b) => {
+			return new Date(b.create_at); - new Date(a.create_at);
+		})
 		res.success(blogs);
 	}).catch(next);
 }
@@ -13,7 +16,7 @@ blogController.createBlog = (req, res, next) =>{
 	var body = Object.assign(new Blog(), req.body);
 	Blog.createBlog(body).then(blog =>{
 		res.success(blog);
-	});
+	}).catch(next);
 }
 
 blogController.updateBlog = (req, res, next) =>{
@@ -24,7 +27,7 @@ blogController.updateBlog = (req, res, next) =>{
 		return Blog.updateBlog(blog);
 	}).then(blog =>{
 		res.success(blog);
-	})
+	}).catch(next);
 }
 
 blogController.getBlog = (req, res, next) =>{

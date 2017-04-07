@@ -14,7 +14,7 @@ adminController.authorize = (req, res, next) => {
 		else{
 			next(new HttpError.BadRequestError('Username or password error'));
 		}
-	})
+	}).catch(next);
 };
 
 module.exports = adminController;

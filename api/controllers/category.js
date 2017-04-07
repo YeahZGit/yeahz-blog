@@ -8,7 +8,6 @@ categoryController.getAllCategory = (req, res, next) => {
 		var categoryList = [];
 		blogs.forEach(val => {
 			var mask = false;
-			var category = [];
 			var categoryInfor = {};
 
 			categoryInfor.category = val.category;

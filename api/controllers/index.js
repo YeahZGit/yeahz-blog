@@ -3,6 +3,7 @@ var adminController = require('./admin');
 var blogController = require('./blog');
 var categoryController = require('./category');
 var tagController = require('./tag');
+var pigeonholeController = require('./pigeonhole');
 var uploadController = require('./upload');
 var multer = require('multer');
 var auth = require('../middlewares/auth');
@@ -25,9 +26,13 @@ router.route('/category')
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/tag')
-	.get(tagContorller.getAllTags)
+	.get(tagController.getAllTags)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
+router.route('/pigeonhole')
+	.get(pigeonholeController.getPigeonhole)
+	.all(() => {throw new HttpError.MethodNotAllowedError()});
+	
 router.route('/uploads/pictures')
 	.post(auth.adminRequired, multer({storage: multer.diskStorage(uploadController.storagePicture)}).single('picture'),
 		uploadController.handleResult)
