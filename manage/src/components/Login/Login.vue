@@ -36,7 +36,7 @@
 					axios.post(configs.API_BASE + '/authorization', vm.master)
 		            .then(function (res) {
 		            	window.sessionStorage.setItem('token', res.data.token);
-		            	window.location.href = '/blogs';
+		            	window.location.href = configs.MANAGE_BASE + '/blogs';
 		            })
 		            .catch(function (err) {
 		            	alert(err.message);
