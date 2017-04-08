@@ -1,7 +1,7 @@
 # YeahZ blog
 
-<center>[![Screen Shoot](./web.png)](http://yeahz.cn)</center>
+[![Screen Shoot](./web.png)](http://yeahz.cn)
 
 ## License
 
-### git @ [yeahz](https://github.com/yeahzgit)
+### github @ [yeahz](https://github.com/yeahzgit)
