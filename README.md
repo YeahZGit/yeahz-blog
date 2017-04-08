@@ -1,5 +1,7 @@
-## YeahZ blog
+# YeahZ blog
 
-***
+[![Screen Shoot](./web.png)](http://yeahz.cn)
 
-![Alt text](./web.png)
+## License
+
+git @ [yeahz](https://github.com/yeahzgit)
