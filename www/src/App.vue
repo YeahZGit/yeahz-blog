@@ -121,7 +121,7 @@
   src: url(./styles/15438025.ttf);
 }
 /*vue transition*/
-.page-enter,{
+.page-enter{
   transform: translateY(50px);
 }
 .page-enter-active{
