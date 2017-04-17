@@ -1,6 +1,8 @@
 # YeahZ blog
 
-[![Screen Shoot](./web.png)](http://yeahz.cn)
+<p align="center">
+	<img src="https://raw.githubusercontent.com/YeahZGit/yeahz-blog/master/web.png">
+</p>
 
 ## License
 
