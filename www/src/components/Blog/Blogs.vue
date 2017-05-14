@@ -56,9 +56,7 @@
 					vm.allBlogs = res.data;
 					vm.total = res.data.length;
 					vm.paging();
-				}).catch(function(err){
-					alert(err.message);
-				});
+				})
 			},
 			pageHandler: function(page) {
       	this.page = page;

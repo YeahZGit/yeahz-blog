@@ -15,9 +15,8 @@
         </div>
         <!--搜索框-->
         <div class="search">
-          <input placeholder="输入搜索词" name="word" v-model="word" autocomplete="off" :style="'right:'+right" class="search-text">
-          <a :href="'https:www.baidu.com/s?word=' + word + ' site:[yeahz.cn]'" target="_blank" class="baidu-link" :style="'z-index:'+zIndex">搜</a>  
-          <span class="glyphicon glyphicon-search" @click="openSearch"></span>
+          <input placeholder="搜索" type="text" v-model="word" :style="'width:'+width" class="search-text" @blur="toggleSearch">
+          <span class="glyphicon glyphicon-search" @click="toggleSearch"></span>
         </div>
         <!--下拉菜单按钮-->
         <div class="menu" @click="dropdown()">
@@ -87,9 +86,9 @@
     data() {
       return {
         showDropNav: false,
+        showSearch: false,
         word: '',
-        right: '',
-        zIndex: 0,
+        width: '',
         copyYear: new Date().getUTCFullYear()
       }
     },
@@ -97,17 +96,15 @@
       dropdown: function() {
         this.showDropNav = !this.showDropNav;
       },
-      openSearch: function(){
+      toggleSearch: function() {
         var vm = this;
-        vm.right = '0px';
-        vm.zIndex = 1;
-        var searchInterval = setInterval(function(){
-          if(!vm.word){
-            vm.right = '-120px';
-            vm.zIndex = 0;
-            clearInterval(searchInterval);
-          }
-        }, 5000)
+        vm.showSearch = !vm.showSearch;
+        if(vm.showSearch) {
+          vm.width = '120px';
+        }
+        else {
+          vm.width = '0px';
+        }
       }
     }
   }
@@ -192,30 +189,23 @@ body{
   overflow: hidden;
   position: absolute;
   right: 15px;
+  display: flex;
+  align-items: center;
 } 
 
 .search-text{
-  background: rgb(58, 126, 129);
-  border: 0px;
-  width: 100px;
-  border-bottom: 1px solid #bdc3c7;
+  background-color: rgb(58, 126, 129);
+  margin-left: 5px;
   outline: none;
-  font-size: 14px;
-  position: relative;
-  right: -120px;
-  transition: right .5s;
-}
-
-.baidu-link{
-  position: absolute;
-  padding-top: 12px;
-  opacity: 0;
+  border: none;
+  border-bottom: 1px solid #bdc3c7;
+  width: 0px;
+  transition: width .5s;
 }
 
 .search span{
-  padding-top: 14px; 
   font-size: 16px;
-  color: white;
+  margin-left: 2px;
 }
 
 .search span:hover{
@@ -347,6 +337,7 @@ body{
   color: #bdc3c7;
 }
 
+/*------媒体查询-----*/
 @media screen and (max-width: 920px){
   .list{
     display: none;

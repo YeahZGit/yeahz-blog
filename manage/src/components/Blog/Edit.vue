@@ -45,17 +45,13 @@
 				var vm = this;
 				blogResource.addBlog(vm.blog).then(function(res){
 					alert('添加成功');
-				}).catch(function(err){
-					alert(err.message);
-				});
+				})
 			},
 			updateBlog: function(){
 				var vm = this;
 				var blogId = vm.$parent.$route.params.blogId;
 				blogResource.updateBlog(blogId, vm.blog).then(function(res){
 					alert('更新成功');
-				}).catch(function(err){
-					alert(err.message);
 				})
 			},
 			getBlogById: function(){
@@ -63,8 +59,6 @@
 				var blogId = vm.$parent.$route.params.blogId;
 				blogResource.getBlogById(blogId).then(function(res){
 					vm.blog =  res.data;
-				}).catch(function(err){
-					alert(err.message);
 				})
 			},
 			upload: function(e){
@@ -74,9 +68,7 @@
 				data.append('picture', file);
 				uploadResource.uploadImg(data).then(function(res){
 					vm.blog.title_img = '/api' + res.data.url;
-				}).catch(function(err){
-					alert(err.message);
-				});
+				})
 			},
 			submit: function(){
 				var vm = this;

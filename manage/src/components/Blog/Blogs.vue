@@ -53,17 +53,13 @@
 					vm.allBlogs = res.data;
 					vm.total = res.data.length;
 					vm.paging();
-				}).catch(function(err){
-					alert(err.message);
-				});
+				})
 			},
 			deleteBlog: function(id){
 				var vm = this;
 				blogResource.deleteBlog(id).then(function(res){
 					vm.getBlogs();
-				}).catch(function(err){
-					alert(err.message);
-				});
+				})
 			},
 			pageHandler(page) {
 				this.page = page;

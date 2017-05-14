@@ -29,8 +29,6 @@
 				var vm = this;
 				categoryResource.getCategory().then(res => {
 					vm.categoryList = res.data;
-				}).catch(err => {
-					alert(err.message);
 				})
 			}
 		},

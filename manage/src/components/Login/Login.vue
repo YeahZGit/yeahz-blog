@@ -33,14 +33,10 @@
 					alert("未提供用户名或密码");
 				}
 				else{
-					axios.post(configs.API_BASE + '/authorization', vm.master)
-		            .then(function (res) {
-		            	window.sessionStorage.setItem('token', res.data.token);
-		            	window.location.href = configs.MANAGE_BASE + '/blogs';
-		            })
-		            .catch(function (err) {
-		            	alert(err.message);
-		            });
+					axios.post(configs.API_BASE + '/authorization', vm.master).then(function (res) {
+						window.sessionStorage.setItem('token', res.data.token);
+						window.location.href = configs.MANAGE_BASE + '/blogs';
+					})  
 				}
 			}
 		}

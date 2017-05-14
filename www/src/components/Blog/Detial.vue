@@ -43,8 +43,6 @@
 				var blogId = vm.$parent.$route.params.blogId;
 				blogResource.getBlogById(blogId).then(function(res){
 					vm.blog = res.data;
-				}).catch(function(err){
-					alert(err.message);
 				})
 			}
 		},
