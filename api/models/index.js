@@ -5,3 +5,6 @@ mongoose.connect(configs.mongodb);
 
 exports.Blog = mongoose.model('Blog', require('./blog'));
 exports.Admin = mongoose.model('Admin', require('./admin'));
+exports.Comment = mongoose.model('Comment', require('./comment'));
+exports.Category = mongoose.model('Category', require('./category'));
+exports.Tag = mongoose.model('Tag', require('./tag'));

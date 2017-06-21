@@ -1,17 +1,16 @@
 var mongoose = require('mongoose');
-
 var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 
 var blogSchema = new Schema({
 	title_img: String,
 	title: String,
-	category: String,
-	tag: String,
+	category: { type: ObjectId, ref: 'Category'},
+	tag: { type: ObjectId, ref: 'Tag' },
 	content: String,
 	cover_url: {type: String},
 	create_at: {type: Date, default: Date.now},
-	update_at: {type: Date, default: Date.now},
-	//comments: {type: String}
+	update_at: {type: Date, default: Date.now}
 })
 
 blogSchema.pre('save',function(next){	
@@ -38,6 +37,15 @@ blogSchema.statics = {
 
 	updateBlog: function(blog){
 		return blog.save();
+	},
+
+	getBlogByArchive: function() {
+		return this.aggregate([
+			{ '$project': { year: { '$year': '$create_at' }, blog: { title: '$title', create_at: '$create_at', _id: '$_id'}}},
+			{ '$sort': { 'blog.create_at': -1 }},
+			{ '$group': { _id: '$year', blogs: { "$push": "$blog" }}},
+			{ '$project': { _id: 0, year: '$_id', blogs: 1 }}
+		])
 	}
 }
 
