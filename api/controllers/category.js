@@ -1,33 +1,33 @@
-const Blog = require('../models').Blog;
+const Category = require('../models').Category;
 const HttpError = require('some-http-error');
 
 var categoryController = {};
 
-categoryController.getAllCategory = (req, res, next) => {
-	Blog.getBlogs({}).then(blogs => {
-		var categoryList = [];
-		blogs.forEach(val => {
-			var mask = false;
-			var categoryInfor = {};
+categoryController.createCategory = (req, res, next) => {
+	var category = Object.assign(new Category(), req.body);
+	Category.createCategory(category).then(category => {
+		res.success(category);
+	}).catch(next)
+}
 
-			categoryInfor.category = val.category;
-			categoryInfor.releaseDate = val.create_at;
-			categoryInfor.title = val.title;
-			categoryInfor._id = val._id;
+categoryController.removeCategory = (req, res, next) => {
+	var categoryId = req.params.categoryId;
+	Category.removeCategory(categoryId).then(() => {
+		res.success(null, 204);
+	}).catch(next)
+} 
 
-			for(var i = 0; i < categoryList.length; i++){
-				if(categoryInfor.category === categoryList[i][0].category){
-					categoryList[i].push(categoryInfor);
-					mask = true;
-					break;
-				}
-			}
-			if(mask === false){
-				categoryList.push([categoryInfor]);
-			}
-		});
-		res.success(categoryList);
-	}).catch(next);
+categoryController.updateCategory = (req, res, next) => {
+	var category = Object.assign(new Category(), req.body);
+	Category.updateCategory(category).then(category => {
+		res.success(category);
+	}).catch(next)
+}
+
+categoryController.getAllCategories = (req, res, next) => {
+	Category.getAllCategories().then(categories => {
+		res.success(categories);
+	}).catch(next)
 }
 
 module.exports = categoryController;

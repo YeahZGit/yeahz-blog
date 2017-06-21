@@ -47,4 +47,10 @@ blogController.deleteBlog = (req, res, next) =>{
 	}).catch(next);
 }
 
+blogController.getBlogByArchive = (req, res, next) => {
+	Blog.getBlogByArchive().then(archives => {
+		res.success(archives);
+	}).catch(next)
+}
+
 module.exports = blogController;

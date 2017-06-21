@@ -1,18 +1,33 @@
-const Blog = require('../models').Blog;
+const Tag = require('../models').Tag;
 const HttpError = require('some-http-error');
 
 var tagController = {};
 
+tagController.createTag = (req, res, next) => {
+	var tag = Object.assign(new Tag(), req.body);
+	Tag.createTag(tag).then(tag => {
+		res.success(tag);
+	}).catch(next)
+}
+
+tagController.removeTag = (req, res, next) => {
+	var tagId = req.params.tagId;
+	Tag.removeTag(tagId).then(() => {
+		res.success(null, 204);
+	}).catch(next)
+} 
+
+tagController.updateTag = (req, res, next) => {
+	var tag = Object.assign(new Tag(), req.body);
+	Tag.updateTag(tag).then(tag => {
+		res.success(tag);
+	}).catch(next)
+}
+
 tagController.getAllTags = (req, res, next) => {
-	Blog.getBlogs({}).then(blogs => {
-		var tags = new Set();
-		blogs.forEach(val => {
-			if(val.tag)
-				tags.add(val.tag);
-		})
-		var tagsArr = [...tags];
-		res.success(tagsArr);
-	}).catch(next);
+	Tag.getAllTags().then(tags => {
+		res.success(tags);
+	}).catch(next)
 }
 
 module.exports = tagController;
