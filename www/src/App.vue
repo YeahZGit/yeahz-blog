@@ -60,7 +60,7 @@
             </ul>
           </div>
         </div>
-        <div class="content">
+        <div class="content" id="content">
           <div class="include">
             <transition name='page'>
               <router-view></router-view>
