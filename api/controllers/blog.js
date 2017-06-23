@@ -4,10 +4,9 @@ const HttpError = require('some-http-error');
 var blogController = {};
 
 blogController.getAllBlogs = (req, res, next) =>{
-	Blog.getBlogs({}).then(blogs =>{
-		blogs.sort((a, b) => {
-			return new Date(b.create_at); - new Date(a.create_at);
-		})
+	var sort = { sort: req.sortObj };
+	var opt = Object.assign(sort, req.pageObj);
+	Blog.getBlogs({}, opt).then(blogs =>{
 		res.success(blogs);
 	}).catch(next);
 }

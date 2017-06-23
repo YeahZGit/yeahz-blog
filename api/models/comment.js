@@ -18,7 +18,7 @@ commentSchema.statics = {
 	},
 
 	getCommentsByBlogId: function(blogId) {
-		return this.find({ blog: blogId }).populate('replies', {});
+		return this.find({ blog: blogId, reply_to: null }).populate('replies', {});
 	},
 
 	getCommentById: function(commentId) {

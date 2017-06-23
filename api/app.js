@@ -9,9 +9,9 @@ var app = express();
 app.use(middlewares.response);
 app.use(bodyParser.json());
 app.use(middlewares.authorization);
+app.use(middlewares.queryHandling);
 app.use(controllers);
 app.use(middlewares.errorHandling);
-app.use(middlewares.queryHandling);
 app.use(express.static(path.join(__dirname,'/uploads'))); 
 
 app.listen(configs.port, function(){
