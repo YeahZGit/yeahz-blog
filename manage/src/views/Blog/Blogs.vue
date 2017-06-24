@@ -3,15 +3,21 @@
 		<table class="table table-hover">
 			<tr>
 				<td><b>文章名</b></td>
+				<td><b>分类</b></td>
 				<td><b>标签</b></td>
 				<td><b>发布时间</b></td>
-				<td><b>最近跟新时间</b></td>
+				<td><b>最近更新时间</b></td>
 				<td><b>操作</b></td>
 			</tr>
 			<tbody>
 				<tr v-for="blog in blogs">
-					<td>{{ blog.title }}</td>
-					<td>{{ blog.category }}</td>
+					<td>
+						<router-link :to="{path: '/blogs/' + blog._id}">{{ blog.title }}</router-link>
+					</td>
+					<!-- <td>{{ blog.category.name }}</td> -->
+					<td>category.name</td>
+					<!-- <td>{{ blog.tag.name }}</td> -->
+					<td>tag.name</td>
 					<td>{{ blog.create_at | timeFilter}}</td>
 					<td>{{ blog.update_at | timeFilter}}</td>
 					<td>

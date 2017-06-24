@@ -5,11 +5,15 @@
 				<nav class="nav">
 					<ul>
 						<li><router-link to='/blogs'>文章</router-link></li>
-						<li><router-link to='/edit'>写文章</router-link></li>
 						<li><router-link to='/comments'>评论</router-link></li>
+						<li><router-link to='/categories'>分类</router-link></li>
+						<li><router-link to='/tags'>标签</router-link></li>
 						<li><router-link to='/about'>关于</router-link></li>
 					</ul>
 				</nav>
+				<aside>
+					<router-link class="btn btn-default" to='/edit' v-if="showEditorBtn">写文章</router-link>
+				</aside>
 				<div class="manager">博客管理系统</div>
 			</div>
 		</div>
@@ -21,12 +25,18 @@
 
 <script>
   export default{
-    name: 'app'
+    name: 'app',
+    computed: {
+    	showEditorBtn() {
+    		return !(/edit/.test(this.$route.fullPath));
+    	}
+    }
   }
 </script>
 	
 <style>
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/simditor/styles/simditor.css';
 body{
 	font-family: 'Microsoft YaHei';
 }
@@ -48,6 +58,7 @@ body{
 	width: 800px;
 	display: flex;
 	font-size: 15px;
+	align-items: center;
 }
 
 .nav{
@@ -67,6 +78,11 @@ body{
 
 .nav li a{
 	text-decoration: none;
+}
+
+.btn-default {
+  background-color: rgba(255,255,255,0.5);
+  border-color: #bdc3c7;
 }
 
 .manager{

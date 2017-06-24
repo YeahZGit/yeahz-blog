@@ -23,7 +23,6 @@
 <script>
 	import blogResource from '../../factories/blogs'
 	import uploadResource from '../../factories/upload'
-	import Simditor from './Simditor'
 	export default {
 		name: 'edit',
 		data() {
@@ -32,9 +31,6 @@
 					title_img: ''
 				}
 			}
-		},
-		components: {
-			Simditor
 		},
 		methods: {
 			getContent: function(content){
@@ -90,7 +86,6 @@
 </script>
 
 <style>
-@import '../../../node_modules/simditor/styles/simditor.css';
 .editor{
 	width: 660px;
 	margin: 0 auto;
