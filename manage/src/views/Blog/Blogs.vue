@@ -18,8 +18,8 @@
 					<td>category.name</td>
 					<!-- <td>{{ blog.tag.name }}</td> -->
 					<td>tag.name</td>
-					<td>{{ blog.create_at | timeFilter}}</td>
-					<td>{{ blog.update_at | timeFilter}}</td>
+					<td>{{ blog.create_at | dateFilter}}</td>
+					<td>{{ blog.update_at | dateFilter}}</td>
 					<td>
 						<a @click="deleteBlog(blog._id)">删除</a>
 						<router-link :to="{path: '/edit/' + blog._id}">编辑</router-link>
@@ -33,7 +33,6 @@
 
 <script>
 	import blogResource from '../../factories/blogs'
-	import filters from '../../utils/filters'
 	export default{
 		name: 'blogs',
 		data() {
@@ -70,11 +69,6 @@
 			pageHandler(page) {
 				this.page = page;
 				this.paging();
-			}
-		},
-		filters: {
-			timeFilter: function(value){
-				return filters.timeFilter(value);
 			}
 		},
 		created() {

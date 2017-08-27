@@ -90,7 +90,7 @@
 		display: none;
 	}
 	.comment-content{
-		margin-bottom: 100px;
+/*		margin-bottom: 100px;*/
 	}
 	.comment-content p{
 		margin-top: 5px;

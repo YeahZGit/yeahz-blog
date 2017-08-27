@@ -18,4 +18,4 @@ var blogResource = {
 	}
 }
 
-module.exports = blogResource;
+export default blogResource;

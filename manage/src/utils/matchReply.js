@@ -1,5 +1,5 @@
-const matchReply = function(comment) {
-	for(let i = 0; i < comment.length; i ++) {
+export default function(comment) {
+	for(let i = 0; i < comment.length; i ++)
 		for(let j = 0; j < comment[i].replies.length; j ++) {
 			if(comment[i].replies[j].reply_to == comment[i]._id) {
 				comment[i].replies[j].reply_to_name = comment[i].username;
@@ -12,8 +12,6 @@ const matchReply = function(comment) {
 				}
 			}
 		}
-	}
 	return comment;
 }
 
-export default matchReply;

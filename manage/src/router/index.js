@@ -9,6 +9,7 @@ import Detail from '../views/Blog/Detail';
 import Comments from '../views/Comment/Comments';
 import Categories from '../views/Category/Categories';
 import Tags from '../views/Tag/Tags';
+import About from '../views/About/About';
 import NotFound from '../views/NotFound/NotFound';
 
 Vue.use(VueRouter);
@@ -58,6 +59,11 @@ const routes = [
 		path: '/tags', 
 		component: Tags,
 		meta: { title: '标签列表' } 
+	},
+	{
+		path: '/about',
+		component: About,
+		meta: { title: '关于' }
 	},
 	{ 
 		path: '*',

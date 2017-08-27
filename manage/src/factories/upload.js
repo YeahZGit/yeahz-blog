@@ -6,4 +6,4 @@ var uploadResource = {
 	}
 }
 
-module.exports = uploadResource;
+export default uploadResource;

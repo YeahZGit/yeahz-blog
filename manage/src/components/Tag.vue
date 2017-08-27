@@ -8,7 +8,8 @@
 			<span v-if="!showCodeEditor" @click="editCode">{{ tagObj.code }}</span>
 			<input placeholder="code" v-if="showCodeEditor" @blur="editCode" v-model='tagObj.code'>
 		</span>
-		<span class='vmini-tag-update' @click='emitTag'> {{ tagType }}</span>
+		<span class='vmini-tag-update' @click='emitTag'>{{ tagType }}</span>
+		<span class='vmini-tag-close' v-if="canClose" @click='close'>×</span>
 	</span>
 </template>
 
@@ -17,7 +18,8 @@
 		name: 'tag',
 		props: {
 			tagObj: {},
-			tagType: ''
+			tagType: '',
+			canClose: false
 		},
 		data() {
 			return {
@@ -34,6 +36,9 @@
 			},
 			emitTag() {
 				this.$emit('setTag', this.tagObj);
+			},
+			close() {
+				this.$emit('close', this.tagObj);
 			}
 		}
 	}
@@ -64,10 +69,10 @@
 	.vmini-tag-item:hover {
 		cursor: pointer;
 	}
-	.vmini-tag-update:before {
+	.vmini-tag-update:before, .vmini-tag-close:before {
 		content: ' | ';
 	}
-	.vmini-tag-update:hover {
+	.vmini-tag-update:hover, .vmini-tag-close:hover {
 		cursor: pointer;
-	}
+	} 
 </style>

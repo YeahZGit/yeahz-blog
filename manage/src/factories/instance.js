@@ -14,4 +14,4 @@ instance.interceptors.response.use(response =>{
 	return Promise.reject(error);
 })
 
-module.exports = instance;
+export default instance;

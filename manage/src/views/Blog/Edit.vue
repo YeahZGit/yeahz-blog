@@ -8,8 +8,18 @@
 		</div>
 		<div class="blog-title">
 			<input class="title" type="text" placeholder="请输入文章标题" v-model.trim="blog.title">
-			<input class="category" type="text" placeholder="请输入文章分类" v-model="blog.category">
-			<input class="tag" type="text" placeholder="请输入文章标签" v-model="blog.tag">
+			<div class="tag-select">
+				<vmini-select 
+					:tagList='categories' 
+					:selectedList='selectedCategory' 
+					@updateTag='updateCategory'>
+				</vmini-select>
+				<vmini-select 
+					:tagList='tags' 
+					:selectedList='selectedTag' 
+					@updateTag='updateTag'>
+				</vmini-select>
+			</div>
 		</div>
 		<div class="blog-content">
 			<simditor @setContent='getContent' :value="blog.content"></simditor>
@@ -21,18 +31,34 @@
 </template>
 
 <script>
-	import blogResource from '../../factories/blogs'
-	import uploadResource from '../../factories/upload'
+	import blogResource from '../../factories/blogs';
+	import categoryResource from '../../factories/category';
+	import tagResource from '../../factories/tag';
+	import uploadResource from '../../factories/upload';
 	export default {
 		name: 'edit',
 		data() {
 			return {
 				blog: { 
 					title_img: ''
-				}
+				},
+				categories: [],
+				tags: [],
+				selectedCategory: [],
+				selectedTag: []
 			}
 		},
 		methods: {
+			updateCategory(category) {
+				this.blog.category = category[0]._id;
+			},
+			updateTag(tagList) {
+				let vm = this;
+				vm.blog.tag = [];
+				tagList.forEach(function(val) {
+					vm.blog.tag.push(val._id);
+				})
+			},
 			getContent: function(content){
 				var vm = this;
 				vm.blog.content = content;
@@ -47,6 +73,7 @@
 				var vm = this;
 				var blogId = vm.$parent.$route.params.blogId;
 				blogResource.updateBlog(blogId, vm.blog).then(function(res){
+					console.log(vm.blog)
 					alert('更新成功');
 				})
 			},
@@ -55,6 +82,15 @@
 				var blogId = vm.$parent.$route.params.blogId;
 				blogResource.getBlogById(blogId).then(function(res){
 					vm.blog =  res.data;
+				})
+			},
+			getCatAndTag: function() {
+				let vm = this;
+				categoryResource.getAllCategories().then(res => {
+					vm.categories = res.data;
+				})
+				tagResource.getAllTags().then(res => {
+					vm.tags = res.data;
 				})
 			},
 			upload: function(e){
@@ -81,6 +117,7 @@
 			if(vm.$parent.$route.params.blogId){
 				vm.getBlogById();
 			}
+			vm.getCatAndTag();
 		}		
 	}
 </script>
@@ -145,31 +182,27 @@
 	width: 100%;
 	height: 50px;
 	margin-top: 20px;
-	display: flex;
 }
 
-.blog-title input{
+.blog-title > .title {
 	height: 100%;
 	font-weight: 500;
 	border: none;
 	outline: none;
 	border-bottom: 1px solid #bdc3c7;
-}
-
-.blog-title>.title{
-	width: 50%;
+	width: 100%;
 	font-size: 30px;
 }
 
-.blog-title>.category,.blog-title>.tag{
-	border-left: 1px solid #bdc3c7;
-	width: 25%;
-	font-size: 22px;
+.tag-select {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 5px;
 }
 
 .blog-content{
 	width: 100%;
-	margin-top: 20px;
+	margin-top: 50px;
 	margin-bottom: 10px;
 }
 

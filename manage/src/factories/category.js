@@ -6,6 +6,12 @@ const categoryResource = {
 	},
 	getAllCategories() {
 		return instance.get('/categories');
+	},
+	updateCategory(id, category) {
+		return instance.put('/categories/' + id, category);
+	},
+	deleteCategory(id) {
+		return instance.delete('/categories/' + id);
 	}
 }
 
