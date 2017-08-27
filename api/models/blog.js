@@ -6,36 +6,36 @@ var blogSchema = new Schema({
 	title_img: String,
 	title: String,
 	category: { type: ObjectId, ref: 'Category'},
-	tag: { type: ObjectId, ref: 'Tag' },
+	tag: [{ type: ObjectId, ref: 'Tag' }],
 	content: String,
-	cover_url: {type: String},
-	create_at: {type: Date, default: Date.now},
-	update_at: {type: Date, default: Date.now}
+	cover_url: { type: String },
+	create_at: { type: Date, default: Date.now() },
+	update_at: { type: Date, default: Date.now() }
 })
 
-blogSchema.pre('save',function(next){	
+blogSchema.pre('save', function(next){	
 	this.update_at = Date.now();
 	next();
 });
 
 blogSchema.statics = {
-	getBlogs: function(query, opt){
-		return this.find(query, {}, opt).exec();
+	getBlogs: function(query, opt) {
+		return this.find(query, {}, opt).populate('category', {}).populate('tag', {}).exec();
 	},
 
-	getBlogById: function(blogId){
-		return this.findById(blogId).exec();
+	getBlogById: function(blogId) {
+		return this.findById(blogId).populate('category', {}).populate('tag', {}).exec();//populate(['category', 'tag']).exec();
 	},
 
-	removeBlogById: function(blogId){
+	removeBlogById: function(blogId) {
 		return this.remove({'_id': blogId}).exec();
 	},
 
-	createBlog: function(blog){
+	createBlog: function(blog) {
 		return blog.save();
 	},
 
-	updateBlog: function(blog){
+	updateBlog: function(blog) {
 		return blog.save();
 	},
 

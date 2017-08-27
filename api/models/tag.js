@@ -15,6 +15,9 @@ tagSchema.statics = {
 	removeTag: function(tagId) {
 		return this.remove({ _id: tagId });
 	},
+	getTagById: function(tagId) {
+		return this.findById(tagId);
+	},
 	updateTag: function(tag) {
 		return tag.save(tag);
 	},

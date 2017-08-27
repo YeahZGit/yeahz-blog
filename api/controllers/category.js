@@ -18,8 +18,12 @@ categoryController.removeCategory = (req, res, next) => {
 } 
 
 categoryController.updateCategory = (req, res, next) => {
-	var category = Object.assign(new Category(), req.body);
-	Category.updateCategory(category).then(category => {
+	let categoryId = req.params.categoryId;
+	let body = req.body;
+	Category.getCategoryById(categoryId).then(category => {
+		Object.assign(category, body);
+		return Category.updateCategory(category);
+	}).then(category => {
 		res.success(category);
 	}).catch(next)
 }

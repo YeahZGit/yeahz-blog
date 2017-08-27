@@ -18,10 +18,14 @@ tagController.removeTag = (req, res, next) => {
 } 
 
 tagController.updateTag = (req, res, next) => {
-	var tag = Object.assign(new Tag(), req.body);
-	Tag.updateTag(tag).then(tag => {
+	let tagId = req.params.tagId;
+	let body = req.body;
+	Tag.getTagById(tagId).then(tag => {
+		Object.assign(tag, body);
+		return Tag.updateTag(tag);
+	}).then(tag => {
 		res.success(tag);
-	}).catch(next)
+	}).catch(next); 
 }
 
 tagController.getAllTags = (req, res, next) => {

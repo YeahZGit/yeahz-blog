@@ -14,6 +14,9 @@ categorySchema.statics = {
 	removeCategory: function(categoryId) {
 		return this.remove({ _id: categoryId });
 	},
+	getCategoryById: function(categoryId) {
+		return this.findById(categoryId);
+	},
 	updateCategory: function(category) {
 		return category.save(category);
 	},

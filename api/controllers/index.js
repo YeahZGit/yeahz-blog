@@ -1,12 +1,13 @@
-var router = require('express').Router();
-var adminController = require('./admin');
-var blogController = require('./blog');
-var categoryController = require('./category');
-var tagController = require('./tag');
-var uploadController = require('./upload');
-var commentController = require('./comment');
-var multer = require('multer');
-var auth = require('../middlewares/auth');
+const router = require('express').Router();
+const adminController = require('./admin');
+const blogController = require('./blog');
+const categoryController = require('./category');
+const tagController = require('./tag');
+const uploadController = require('./upload');
+const commentController = require('./comment');
+const aboutController = require('./about');
+const multer = require('multer');
+const auth = require('../middlewares/auth');
 const HttpError = require('some-http-error');
 // var upload = multer({dest: './uploads/pictures'})
 
@@ -54,6 +55,11 @@ router.route('/tags/:tagId')
 	.delete(auth.adminRequired, tagController.removeTag)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 	
+router.route('/about/:aboutId')
+	.get(aboutController.getAbout)
+	.put(auth.adminRequired, aboutController.updateAbout)
+	.all(() => {throw new HttpError.MethodNotAllowedError()});
+
 router.route('/uploads/pictures')
 	.post(auth.adminRequired, multer({storage: multer.diskStorage(uploadController.storagePicture)}).single('picture'),
 		uploadController.handleResult)
