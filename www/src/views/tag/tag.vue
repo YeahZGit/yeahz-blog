@@ -2,7 +2,7 @@
 	<div class="article-tag">
 		<h4>共{{tags.length}}个标签</h4>
 		<div class="tag-box">
-			<router-link v-for="tag in tags" to='/#'>{{tag}}</router-link>
+			<router-link v-for="tag in tags" :to="'/tags/' + tag.code">{{tag.name}}</router-link>
 		</div>
 	</div>
 </template>
@@ -21,7 +21,6 @@
 				var vm = this;
 				tagResource.getTags().then(res => {
 					vm.tags = res.data;
-					console.log("res.data")
 				}).catch(err => {
 					alert(err.message);
 				})
@@ -50,13 +49,11 @@
 
 .tag-box a{
 	margin: 10px;
-	/*font-size: 20px;*/
 	color: #9ed7da;
 	text-decoration: none;
 }
 
-.tag-box a:hover{
-	font-size: 24px;
-	color: red;
+.tag-box a:hover {
+	color: #2980b9;
 }
 </style>

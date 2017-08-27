@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Blogs from '../components/blog/blogs'
-import Detial from '../components/blog/detial'
-import Category from '../components/category/category'
-import Tag from '../components/tag/tag'
-import Pigeonhole from '../components/pigeonhole/pigeonhole'
-import About from '../components/about/about'
-import NotFound from '../components/notFound/notFound'
+import Blogs from '../views/blog/blogs'
+import Detial from '../views/blog/detial'
+import Category from '../views/category/category'
+import Tag from '../views/tag/tag'
+import Archives from '../views/archive/archives'
+import About from '../views/about/about'
+import NotFound from '../views/notFound/notFound'
 
 Vue.use(VueRouter)
 
@@ -15,42 +15,57 @@ const routes = [
 	{ 
 		path: '/', 
 		component: Blogs, 
-		meta: {title: 'YeahZ博客'} 
+		meta: { title: 'YeahZ博客' } 
 	},
 	{ 
 		path: '/home', 
 		component: Blogs, 
-		meta: {title: '首页'} 
+		meta: { title: '首页' } 
 	},
 	{ 
 		path: '/blogs/:blogId', 
 		component: Detial, 
-		meta: {title: '文章详情'} 
+		meta: { title: '文章详情' } 
 	},
 	{ 
 		path: '/about', 
 		component: About, 
-		meta: {title: '关于'} 
+		meta: { title: '关于' } 
 	},
 	{ 
-		path: '/category', 
+		path: '/categories', 
 		component: Category, 
-		meta: {title: '分类'} 
+		meta: { title: '分类' } 
+	},
+	{
+		path: '/categories/:code',
+		component: Blogs,
+		meta: { title: '分类 ' }
 	},
 	{ 
-		path: '/tag', 
+		path: '/tags', 
 		component: Tag, 
-		meta: {title: '标签'} 
+		meta: { title: '标签' } 
+	},
+	{
+		path: '/tags/:code',
+		component: Blogs,
+		meta: { title: '标签 ' }
 	},
 	{ 
-		path: '/pigeonhole', 
-		component: Pigeonhole, 
-		meta: {title: '归档'} 
+		path: '/archives', 
+		component: Archives, 
+		meta: { title: '归档' } 
+	},
+	{
+		path: '/archives/:code',
+		component: Blogs,
+		meta: { title: '归档 ' }
 	},
 	{ 
 		path: '/*', 
 		component: NotFound, 
-		meta: {title: 'Error 404'} 
+		meta: { title: 'Error 404' } 
 	}
 ]
 
@@ -60,7 +75,15 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-	document.title = to.meta.title;
+	let path = to.path;
+	let code = '';
+	if(path.search(/(categories|tags|archives)[\S*]/) != -1) {
+		code = to.params.code;
+		document.title = to.meta.title + code;
+	}
+	else {
+		document.title = to.meta.title;
+	}
   next()
 })
 

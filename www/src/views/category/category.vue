@@ -1,22 +1,25 @@
 <template>
 	<div class="category">
 		<div class="category-list" v-for="category in categoryList">
-			<h3>{{category[0].category}}<span>( {{category.length}}篇文章 )</span></h3>
-			<article v-for='(blog, index) in category'>
+			<h3>
+				<router-link :to="'/categories/' + category.code"  class="cate-header">{{ category.name }}</router-link>
+				<span>( {{ category.blogs.length }}篇文章 )</span>
+			</h3>
+			<article v-for='(blog, index) in category.blogs' class="cate">
 				<ul>
-					<li class="order">{{index+1}}</li>
-					<li class="release-date">{{blog.releaseDate | timeFilter}}</li>
-					<li class="article-title"><router-link :to="'/blogs/' + blog._id"> {{blog.title}}</router-link></li>
+					<li class="order">{{ index + 1 }}</li>
+					<li class="release-date">{{ blog.create_at | dateFilter }}</li>
+					<li class="article-title"><router-link :to="'/blogs/' + blog._id"> {{ blog.title }}</router-link></li>
 				</ul>
-				<div class="decorate" v-if="!((index+1) === category.length)"></div>
+				<div class="decorate"></div>
 			</article>
 		</div>
 	</div>
 </template>
 
 <script>
-	import categoryResource from '../../factories/category';
-	import Filters from '../../utils/filters';
+	import blogResource from '../../factories/blogs';
+	import getCategory from '../../utils/getCategory';
 	export default{
 		name: 'category',
 		data() {
@@ -27,14 +30,9 @@
 		methods: {
 			getCategory() {
 				var vm = this;
-				categoryResource.getCategory().then(res => {
-					vm.categoryList = res.data;
+				blogResource.getBlogs().then(res => {
+					vm.categoryList = getCategory(res.data);
 				})
-			}
-		},
-		filters: {
-			timeFilter: function(value){
-				return Filters.timeFilter(value).substr(0, 10);
 			}
 		},
 		created() {
@@ -44,6 +42,14 @@
 </script>
 
 <style>
+.cate-header {
+	color: rgb(58, 126, 129);
+}
+
+.cate-header:hover {
+	text-decoration: none;
+}
+
 .category{
 	margin-left: 30px;
 }
@@ -100,5 +106,9 @@
 	height: 25px;
 	width: 2px;
 	margin: 1px 0px 1px 8px;
+}
+
+.cate:last-child .decorate {
+	display: none;
 }
 </style>

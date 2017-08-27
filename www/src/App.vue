@@ -7,9 +7,9 @@
         <div class="nav-link">
           <ul>
             <li><router-link to='/home'>首页</router-link></li>
-            <li><router-link to='/category'>分类</router-link></li>
-            <li><router-link to='/tag'>标签</router-link></li>
-            <li><router-link to='/pigeonhole'>归档</router-link></li>
+            <li><router-link to='/categories'>分类</router-link></li>
+            <li><router-link to='/tags'>标签</router-link></li>
+            <li><router-link to='/archives'>归档</router-link></li>
             <li><router-link to='/about'>关于</router-link></li>
           </ul>
         </div>
@@ -29,9 +29,9 @@
       <div class="drop-nav-box" v-if='showDropNav'>
         <div class="drop-nav">
           <router-link to='/home'>首页</router-link>
-          <router-link to='/category'>分类</router-link>
-          <router-link to='/tag'>标签</router-link>
-          <router-link to='/pigeonhole'>归档</router-link>
+          <router-link to='/categories'>分类</router-link>
+          <router-link to='/tags'>标签</router-link>
+          <router-link to='/archives'>归档</router-link>
           <router-link to='/about'>关于</router-link>
         </div>
       </div>
@@ -72,6 +72,7 @@
       <footer class="footer">
         <div class="footercontent">
           <div class="copyright">Copyright &copy {{copyYear}} yeahz.cn</div>
+          <div class="icp">皖ICP备 17016988号</div>
         </div>
       </footer>
     </div>
@@ -337,6 +338,11 @@ body{
   color: #bdc3c7;
 }
 
+.copyright, .icp {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 5px;
+}
 /*------媒体查询-----*/
 @media screen and (max-width: 920px){
   .list{

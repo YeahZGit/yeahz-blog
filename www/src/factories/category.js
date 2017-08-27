@@ -2,7 +2,7 @@ import instance from './instance';
 
 var categoryResource = {
 	getCategory: function() {
-		return instance.get('/category');
+		return instance.get('/categories');
 	}
 }
 

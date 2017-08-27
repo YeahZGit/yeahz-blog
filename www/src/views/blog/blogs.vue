@@ -8,16 +8,20 @@
 				<h4 class="blog-title">{{blog.title}}</h4>
 				<div class="blog-infor">
 					<em class="tag">
+						<span class="glyphicon glyphicon-briefcase"></span>
+						<span>{{blog.category.name}}</span>
+					</em>
+					<em class="tag">
 						<span class="glyphicon glyphicon-tag"></span>
-						<span>{{blog.category}}</span>
+						<span v-for='tag in blog.tag' class="tag-list">{{tag.name}}</span>
 					</em>
 					<em>
 						<span class="glyphicon glyphicon-calendar"></span>
-						<span>{{blog.create_at | timeFilter}}</span> 
+						<span>{{blog.create_at | dateFilter('yyyy-MM-dd')}}</span> 
 					</em>
 				</div>
 				<p class="paragraph">
-					{{blog.content | lengthFilter(90)}}
+					{{blog.content | htmlFilter(90)}}
 					<router-link :to="'/blogs/' + blog._id" class="show-all">查看原文</router-link>
 				</p>
 			</div>
@@ -29,7 +33,7 @@
 
 <script>
 	import blogResource from '../../factories/blogs';
-	import Filters from '../../utils/filters';
+	import blogsHandler from '../../utils/blogsHandler';
 	export default{
 		name: 'blogs',
 		data() {
@@ -53,8 +57,9 @@
 			getBlogs: function() {
 				var vm = this;
 				blogResource.getBlogs().then(function(res){
-					vm.allBlogs = res.data;
-					vm.total = res.data.length;
+					let route = vm.$parent.$route;
+					vm.allBlogs = blogsHandler(res.data, route.path, route.params.code);
+					vm.total = vm.allBlogs.length;
 					vm.paging();
 				})
 			},
@@ -62,14 +67,6 @@
       	this.page = page;
       	this.paging();
     	}
-		},
-		filters: {
-			timeFilter: function(value){
-				return Filters.timeFilter(value).substr(0, 10);
-			},
-			lengthFilter: function(value, length){
-				return Filters.lengthFilter(value, length) + '... ';
-			}
 		},
 		created() {
 			return this.getBlogs();
@@ -122,6 +119,12 @@
 	margin-right: 10px;
 }
 
+.tag-list:after {
+	content: '、';
+}
+.tag-list:last-child:after {
+	content: '';
+}
 .paragraph{
 	margin-top: 10px;
 	line-height: 1.6;

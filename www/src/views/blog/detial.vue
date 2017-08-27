@@ -8,12 +8,16 @@
 				<h4 class="detial-blog-title">{{blog.title}}</h4>
 				<div class="detial-blog-infor">
 					<em class="detial-tag">
-						<span class="glyphicon glyphicon-tag"></span>
-						<span>{{blog.category}}</span>
+						<span class="glyphicon glyphicon-briefcase"></span>
+						<span>{{blog.category.name}}</span>
+					</em>
+					<em class="detial-tag">
+						<span class="glyphicon glyphicon-tags"></span>
+						<span v-for='tag in blog.tag'>{{tag.name}}</span>
 					</em>
 					<em>
 						<span class="glyphicon glyphicon-calendar"></span>
-						<span>{{blog.create_at | timeFilter}}</span> 
+						<span>{{blog.create_at | dateFilter}}</span> 
 					</em>
 				</div>
 				<p class="detial-paragraph" v-html="blog.content"></p>
@@ -28,7 +32,6 @@
 
 <script>
 	import blogResource from '../../factories/blogs';
-	import Filters from '../../utils/filters';
 
 	export default{
 		name: 'detial',
@@ -44,11 +47,6 @@
 				blogResource.getBlogById(blogId).then(function(res){
 					vm.blog = res.data;
 				})
-			}
-		},
-		filters: {
-			timeFilter: function(value){
-				return Filters.timeFilter(value);
 			}
 		},
 		created() {

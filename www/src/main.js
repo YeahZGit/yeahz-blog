@@ -3,8 +3,12 @@ import App from './App'
 import router from './router'
 import Pagenav from 'vue-pagenav'
 
-Vue.use(Pagenav)
+import filters from './utils/filters';
 
+Vue.use(Pagenav)
+Vue.filter('lengthFilter', filters.lengthFilter);
+Vue.filter('dateFilter', filters.dateFilter);
+Vue.filter('htmlFilter', filters.htmlFilter);
 
 new Vue({
   router,
