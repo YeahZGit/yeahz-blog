@@ -12,7 +12,7 @@ commentController.createComment = (req, res, next) => {
 			return Comment.getCommentById(comment._id);
 		}
 		else {
-			Comment.updateComment(comment._id);
+			Comment.updateComment(comment._id);//设置root_id属性
 			return Comment.getCommentById(comment._id);
 		}
 	}).then(comment => {

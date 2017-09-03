@@ -9,8 +9,8 @@ var blogSchema = new Schema({
 	tag: [{ type: ObjectId, ref: 'Tag' }],
 	content: String,
 	cover_url: { type: String },
-	create_at: { type: Date, default: Date.now() },
-	update_at: { type: Date, default: Date.now() }
+	create_at: { type: Date, default: Date.now },
+	update_at: { type: Date, default: Date.now }
 })
 
 blogSchema.pre('save', function(next){	

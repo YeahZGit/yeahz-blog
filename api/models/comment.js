@@ -5,6 +5,7 @@ var ObjectId = Schema.Types.ObjectId;
 var commentSchema = new Schema({
 	username: { type: String, default: '游客' },
 	content: String,
+	email: String,
 	blog: { type: ObjectId, ref: 'Blog' },
 	create_at: { type: Date, default: Date.now },
 	root_id: { type: ObjectId, ref: 'Comment' },
