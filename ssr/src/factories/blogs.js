@@ -3,7 +3,7 @@ import serverInstance from './server-instance';
 
 const blogResource = {
 	getBlogs: function() {
-		return clientInstance.get('/blogs');
+		return clientInstance.get('/blogs?sort=-create_at');
 	},
 	getBlogById: function(id) {
 		return clientInstance.get('/blogs/' + id);
