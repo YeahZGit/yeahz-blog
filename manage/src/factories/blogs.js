@@ -5,7 +5,7 @@ var blogResource = {
 		return instance.post('/blogs', data);
 	},
 	getBlogs: function(){
-		return instance.get('/blogs');
+		return instance.get('/blogs?sort=-create_at');
 	},
 	getBlogById: function(id){
 		return instance.get('/blogs/' + id);
