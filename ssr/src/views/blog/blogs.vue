@@ -5,71 +5,85 @@
 				<img :src="blog.title_img"/>
 			</div>
 			<div class="blog-content">
-				<h4 class="blog-title">{{blog.title}}</h4>
+				<h4 class="blog-title">{{ blog.title }}</h4>
 				<div class="blog-infor">
-					<em class="tag">
+					<span class="tag">
 						<span class="glyphicon glyphicon-briefcase"></span>
-						<span>{{blog.category.name}}</span>
-					</em>
-					<em class="tag">
+						<span> {{ blog.category.name }}</span>
+					</span>
+					<span class="tag">
 						<span class="glyphicon glyphicon-tag"></span>
-						<span v-for='tag in blog.tag' class="tag-list">{{tag.name}}</span>
-					</em>
-					<em>
+						<span v-for='tag in blog.tag' :key="tag._id" class="tag-list">{{ tag.name }}</span>
+					</span>
+					<span>
 						<span class="glyphicon glyphicon-calendar"></span>
-						<span>{{blog.create_at | dateFilter('yyyy-MM-dd')}}</span> 
-					</em>
+						<span> {{ blog.create_at | dateFilter }}</span> 
+					</span>
 				</div>
 				<p class="paragraph">
-					{{blog.content | htmlFilter(90)}}
+					{{ blog.content | htmlFilter(90) }}
 					<router-link :to="'/blogs/' + blog._id" class="show-all">查看原文</router-link>
 				</p>
 			</div>
 		</div>
-		<!--分页-->
-		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler" :key="page"><zpagenav>
+		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler" :key="page"></zpagenav>
 		</div>
 </template>
 
 <script>
-	import blogResource from '../../factories/blogs';
-	import blogsHandler from '../../utils/blogsHandler';
 	export default{
 		name: 'blogs',
 		data() {
 			return {
-				show: true,
-				blogs: [],
-				allBlogs: [],
-				page: 1,
-				pageSize: 4,
-				total: 0
+				pageSize: this.$store.state.pageSize,
 			}
 		},
+
+		computed: {
+			blogs() {
+				return this.$store.getters.getCurPageBlogs;
+			},
+			page() {
+				return this.$store.state.currentPage;
+			},
+			total() {
+				return this.$store.state.currentBlogs.length;
+			}
+		},
+
+		asyncData({ store }) {
+			return store.dispatch('GET_BLOGS');
+		},
+
 		methods: {
-			paging: function() {
-				var vm = this;
-				vm.blogs = [];
-				for(var i=(vm.page-1)*vm.pageSize, j=0; j<vm.pageSize && i<vm.total; i++, j++){
-					vm.blogs[j] = vm.allBlogs[i];
-				}
-			},
-			getBlogs: function() {
-				var vm = this;
-				blogResource.getBlogs().then(function(res){
-					let route = vm.$parent.$route;
-					vm.allBlogs = blogsHandler(res.data, route.path, route.params.code);
-					vm.total = vm.allBlogs.length;
-					vm.paging();
-				})
-			},
-			pageHandler: function(page) {
-      	this.page = page;
-      	this.paging();
+			pageHandler(page) {
+      	this.$store.commit('PAGE_CHANGE', { page });
     	}
 		},
-		created() {
-			return this.getBlogs();
+
+		title() {
+			let url = this.$route.path;
+			let blog = this.blogs[0];
+
+			if(url.search(/(categories)[\S*]/) != -1) {
+				return '分类' + '「' + blog.category.name + '」';
+			}
+			else if(url.search(/(tags)[\S*]/) != -1) {
+				let code = this.$route.params.code;
+				let tagName;
+				blog.tag.forEach(val => {
+					if(val.code == code) {
+						tagName = val.name;
+					}
+				})
+				return '标签' + '「' + tagName + '」';
+			}
+			else if(url.search(/(archives)[\S*]/) != -1) {
+				return '归档' + '「' + this.$route.params.code + '年」';
+			}
+			else {
+				return '首页';
+			}
 		}
 	}
 </script>
@@ -122,6 +136,7 @@
 .tag-list:after {
 	content: '、';
 }
+
 .tag-list:last-child:after {
 	content: '';
 }

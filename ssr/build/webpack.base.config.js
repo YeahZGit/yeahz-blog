@@ -13,6 +13,12 @@ module.exports = {
     publicPath: '/dist/',
     filename: '[name].[chunkhash].js'
 	},
+	resolve: { 
+		extensions: ['.js','.vue'],
+		alias: { 
+			'vue': 'vue/dist/vue.js' 
+		} 
+	},
 	module: {
 		noParse: /es6-promise\.js$/, 
 		rules: [{
@@ -65,12 +71,12 @@ module.exports = {
 	},
 	plugins: isProd
     ? [
-    	new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
-        }),
-        new ExtractTextPlugin({
-          filename: 'common.[chunkhash].css'
-        })
+	    	new webpack.optimize.UglifyJsPlugin({
+	        compress: { warnings: false }
+	      }),
+	      new ExtractTextPlugin({
+	        filename: 'common.[chunkhash].css'
+	      })
       ]
     : [new FriendlyErrorsPlugin()] 
 }

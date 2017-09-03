@@ -3,6 +3,15 @@ import App from './App.vue';
 import { sync } from 'vuex-router-sync';
 import { createRouter } from './router';
 import { createStore } from './store';
+import Pagenav from 'vue-pagenav';
+import filters from './utils/filters';
+import titleMixin from './utils/title';
+
+Vue.mixin(titleMixin);
+Vue.use(Pagenav);
+Vue.filter('lengthFilter', filters.lengthFilter);
+Vue.filter('dateFilter', filters.dateFilter);
+Vue.filter('htmlFilter', filters.htmlFilter);
 
 export function createApp() {
 	const router = createRouter();

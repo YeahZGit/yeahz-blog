@@ -74,6 +74,11 @@
           <div class="copyright">Copyright &copy 2017 yeahz.cn</div>
           <div class="icp">皖ICP备 17016988号</div>
         </div>
+        <div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </footer>
     </div>
   </div>
@@ -205,6 +210,7 @@ body{
 .search span{
   font-size: 16px;
   margin-left: 2px;
+  top: 5px;
 }
 
 .search span:hover{

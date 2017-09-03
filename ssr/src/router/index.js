@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 const Blogs = () => import('../views/blog/blogs.vue');
-const Detial = () => import('../views/blog/detial.vue');
+const Detail = () => import('../views/blog/detail.vue');
 const Category = () => import('../views/category/category.vue');
 const Tag = () => import('../views/tag/tag.vue');
 const Archives = () => import('../views/archive/archives.vue');
@@ -14,58 +14,47 @@ Vue.use(VueRouter)
 const routes = [
 	{ 
 		path: '/', 
-		component: Blogs, 
-		meta: { title: 'YeahZ博客' } 
+		component: Blogs
 	},
 	{ 
 		path: '/home', 
-		component: Blogs, 
-		meta: { title: '首页' } 
+		component: Blogs
 	},
 	{ 
-		path: '/blogs/:blogId', 
-		component: Detial, 
-		meta: { title: '文章详情' } 
+		path: '/blogs/:id', 
+		component: Detail
 	},
 	{ 
 		path: '/about', 
-		component: About, 
-		meta: { title: '关于' } 
+		component: About
 	},
 	{ 
 		path: '/categories', 
-		component: Category, 
-		meta: { title: '分类' } 
+		component: Category
 	},
 	{
 		path: '/categories/:code',
-		component: Blogs,
-		meta: { title: '分类 ' }
+		component: Blogs
 	},
 	{ 
 		path: '/tags', 
-		component: Tag, 
-		meta: { title: '标签' } 
+		component: Tag
 	},
 	{
 		path: '/tags/:code',
-		component: Blogs,
-		meta: { title: '标签 ' }
+		component: Blogs
 	},
 	{ 
 		path: '/archives', 
-		component: Archives, 
-		meta: { title: '归档' } 
+		component: Archives
 	},
 	{
 		path: '/archives/:code',
-		component: Blogs,
-		meta: { title: '归档 ' }
+		component: Blogs
 	},
 	{ 
 		path: '/*', 
-		component: NotFound, 
-		meta: { title: 'Error 404' } 
+		component: NotFound 
 	}
 ]
 

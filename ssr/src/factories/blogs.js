@@ -1,14 +1,15 @@
-import instance from './instance';
+import clientInstance from './client-instance';
+import serverInstance from './server-instance';
 
-var blogResource = {
+const blogResource = {
 	getBlogs: function() {
-		return instance.get('/blogs');
+		return clientInstance.get('/blogs');
 	},
 	getBlogById: function(id) {
-		return instance.get('/blogs/' + id);
+		return clientInstance.get('/blogs/' + id);
 	},
 	getBlogsByArchives: function() {
-		return instance.get('/blogs/archives');
+		return clientInstance.get('/blogs/archives');
 	}
 }
 

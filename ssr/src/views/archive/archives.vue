@@ -10,7 +10,7 @@
 					<li class="order">{{ index + 1 }}</li>
 					<li class="release-date">{{ blog.create_at | dateFilter }}</li>
 					<li class="article-title">
-						<router-link :to="'/blogs/' + blog._id"> {{blog.title}}</router-link>
+						<router-link :to="'/blogs/' + blog._id"> {{ blog.title }}</router-link>
 					</li>
 				</ul>
 				<div class="decorate"></div>
@@ -20,24 +20,21 @@
 </template>
 
 <script>
-	import blogResource from '../../factories/blogs';
-	import Filters from '../../utils/filters';
 	export default{
 		name: 'archives',
-		data() {
-			return {
-				archivesList: []
+
+		computed: {
+			archivesList() {
+				return this.$store.state.archivesList;
 			}
 		},
-		methods: {
-			getBlogsByArchives() {
-				blogResource.getBlogsByArchives().then(res => {
-					this.archivesList = res.data;
-				})
-			}
+
+		asyncData({ store }) {
+			return store.dispatch('GET_ARCHIVES');
 		},
-		created() {
-			return this.getBlogsByArchives();
+
+		title() {
+			return '博客归档';
 		}
 	}
 </script>
@@ -53,6 +50,10 @@
 
 .archives{
 	margin-left: 30px;
+}
+
+.archive ul {
+    margin-left: -1px;
 }
 
 .archives-list{
@@ -99,7 +100,7 @@
 }
 
 .release-date{
-	margin-right: 10px;
+	margin: 0 10px;
 }
 
 .decorate{

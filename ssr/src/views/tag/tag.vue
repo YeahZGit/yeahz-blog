@@ -2,30 +2,26 @@
 	<div class="article-tag">
 		<h4>共{{tags.length}}个标签</h4>
 		<div class="tag-box">
-			<router-link v-for="tag in tags" :to="'/tags/' + tag.code">{{tag.name}}</router-link>
+			<router-link v-for="tag in tags" :key="tag._id" :to="'/tags/' + tag.code">{{tag.name}}</router-link>
 		</div>
 	</div>
 </template>
 
 <script>
-	import tagResource from '../../factories/tag'
 	export default{
 		name: 'tag',
-		data() {
-			return {
-				tags: []
+		computed: {
+			tags() {
+				return this.$store.state.tags;
 			}
 		},
-		methods: {
-			getTags: function() {
-				var vm = this;
-				tagResource.getTags().then(res => {
-					vm.tags = res.data;
-				})
-			}
+
+		asyncData({ store }) {
+			return store.dispatch('GET_TAGS');
 		},
-		created() {
-			return this.getTags();
+
+		title() {
+			return '博客标签';
 		}
 	}
 </script>

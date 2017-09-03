@@ -1,13 +1,27 @@
 <template>
 	<div class="about">
-		<h3>关于</h3>
-		<p>本博客作为个人博客将用于分享个人学习心得</p>	
+		<h3 class="about-title">关于</h3>
+		<div v-html="about.content"></div>	
 	</div>
 </template>
 
 <script>
 	export default{
-		name: 'about'
+		name: 'about',
+
+		computed: {
+			about() {
+				return this.$store.state.about;
+			}
+		},
+
+		asyncData({ store }) {
+			return store.dispatch('GET_ABOUT', { id: '593fa3dcd16db1196e9ecfc2' });
+		},
+
+		title() {
+			return '关于';
+		}
 	}
 </script>
 

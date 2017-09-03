@@ -1,8 +1,8 @@
-import instance from './instance';
+import clientInstance from './client-instance';
 
-var tagResource = {
+const tagResource = {
 	getTags: function() {
-		return instance.get('/tags');
+		return clientInstance.get('/tags');
 	}
 }
 

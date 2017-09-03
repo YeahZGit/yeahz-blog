@@ -18,25 +18,21 @@
 </template>
 
 <script>
-	import blogResource from '../../factories/blogs';
-	import getCategory from '../../utils/getCategory';
 	export default{
 		name: 'category',
-		data() {
-			return {
-				categoryList: []
+
+		computed: {
+			categoryList() {
+				return this.$store.getters.getCateList;
 			}
 		},
-		methods: {
-			getCategory() {
-				var vm = this;
-				blogResource.getBlogs().then(res => {
-					vm.categoryList = getCategory(res.data);
-				})
-			}
+
+		asyncData({ store }) {
+			return store.dispatch('GET_BLOGS');
 		},
-		created() {
-			return this.getCategory();
+
+		title() {
+			return '博客分类';
 		}
 	}
 </script>
@@ -110,5 +106,9 @@
 
 .cate:last-child .decorate {
 	display: none;
+}
+
+.cate ul {
+	margin-left: -1px;
 }
 </style>

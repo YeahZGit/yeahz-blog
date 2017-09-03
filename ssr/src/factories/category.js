@@ -1,8 +1,8 @@
-import instance from './instance';
+import clientInstance from './client-instance';
 
-var categoryResource = {
+const categoryResource = {
 	getCategory: function() {
-		return instance.get('/categories');
+		return clientInstance.get('/categories');
 	}
 }
 

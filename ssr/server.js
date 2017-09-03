@@ -1,11 +1,10 @@
 const Express = require('express');
-const Vue = require('vue');
 const { createBundleRenderer } = require('vue-server-renderer');
 const fs = require('fs');
 const path = require('path');
 const proxy = require('http-proxy-middleware');
 const resolve = file => path.resolve(__dirname, file)
-
+const config = require('./config');
 const server = Express();
 const serverBundle = require('./dist/vue-ssr-server-bundle.json');
 const clientManifest = require('./dist/vue-ssr-client-manifest.json');
@@ -20,16 +19,8 @@ const serve = (path, cache) => Express.static(resolve(path), {
   maxAge: cache //&& isProd ? 1000 * 60 * 60 * 24 * 30 : 0
 })
 
-const proxyOptions = {
-	target: 'http://localhost:3000',
- 	changeOrigin: true,
-  pathRewrite: {
-  	'^/api': ''
-  }  
-}
-
 server.use('/dist', serve('./dist', true));
-server.use('/api', proxy(proxyOptions));
+server.use('/api', proxy(config.PROXY_OPTIONS));
 
 server.get('*', (req, res) => {
 	const context = {
@@ -39,10 +30,9 @@ server.get('*', (req, res) => {
 	renderer.renderToString(context, (err, html) => {
 		if(err) {
 			res.status(500).end('Internal server error');
-			console.error(err)
 			return;
 		}
-		res.end(html)
+		res.end(html);
 	})
 })
 
