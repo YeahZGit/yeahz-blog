@@ -70,14 +70,22 @@
       </div>
       <!--页脚-->
       <footer class="footer">
-        <div class="footercontent">
-          <div class="copyright">Copyright &copy 2017 yeahz.cn</div>
-          <div class="icp">皖ICP备 17016988号</div>
-        </div>
-        <div>
-          <div></div>
-          <div></div>
-          <div></div>
+        <div class="footer-box">
+          <section class="footercontent">
+            <div class="copyright">Copyright &copy 2017 yeahz.cn</div>
+            <div class="icp">皖ICP备 17016988号</div>
+          </section>
+          <section class="link-logo">
+            <a target="block" href="https://www.github.com/yeahzgit">
+             <img src="./pictures/github.svg" class="link-ico" title="github">
+            </a>
+            <a target="block" href="https://www.zhihu.com/people/zong-zi-33-95/activities">
+              <img src="./pictures/zhihu.svg" class="link-ico" title="知乎">
+            </a>
+            <a target="block" href="http://weibo.com/5267389299/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1">
+              <img src="./pictures/weibo.svg" class="link-ico" title="新浪微博">
+            </a>
+          </section>
         </div>
       </footer>
     </div>
@@ -327,7 +335,7 @@ body{
 .footer{
   clear: both;
   width: 100%;
-  height: 90px;
+  height: 100px;
   background-color: rgb(58, 126, 129);
   position: relative;
   top: 50px;
@@ -338,14 +346,34 @@ body{
 
 .footercontent{
   font-size: 16px;
-  max-width: 700px;
-  color: #bdc3c7;
+  color: #eaebec;
+  flex: 1;
+}
+
+.link-logo {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-box {
+  display: flex;
+  align-items: flex-end;
+  width: 900px;
 }
 
 .copyright, .icp {
   font-size: 14px;
   text-align: center;
   margin-top: 5px;
+}
+
+.link-ico {
+  width: 28px;
+  height: 28px;
+}
+
+section.link-logo a {
+  margin: 0 10px;
 }
 /*------媒体查询-----*/
 @media screen and (max-width: 920px){
@@ -388,6 +416,19 @@ body{
 
   .menu span{
     margin-top: 4px;
+  }
+
+  .footer-box {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer {
+    height: 140px;
+  }
+
+  .link-logo {
+    margin-top: 20px;
   }
 }
 </style>
