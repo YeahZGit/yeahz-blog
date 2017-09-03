@@ -85,6 +85,7 @@ export default {
 			commentResource.createComment(vm.newComment).then(res => {
 				vm.newComment = res.data;	
 				vm.$emit('addComment', vm.newComment);
+				vm.newComment = {}
 			})
 		}
 	}
