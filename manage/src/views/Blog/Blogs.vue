@@ -14,10 +14,8 @@
 					<td>
 						<router-link :to="{path: '/blogs/' + blog._id}">{{ blog.title }}</router-link>
 					</td>
-					<!-- <td>{{ blog.category.name }}</td> -->
-					<td>category.name</td>
-					<!-- <td>{{ blog.tag.name }}</td> -->
-					<td>tag.name</td>
+					<td>{{ blog.category.name }}</td>
+					<td><span v-for="tag in blog.tag" class="tag-list">{{ tag.name }}</span></td>
 					<td>{{ blog.create_at | dateFilter}}</td>
 					<td>{{ blog.update_at | dateFilter}}</td>
 					<td>
@@ -27,7 +25,12 @@
 				</tr>	
 			</tbody>
 		</table>
-		<zpagenav :page="page" :page-size="pageSize" :total="total" :page-handler="pageHandler"></zpagenav>
+		<zpagenav 
+		:page="page" 
+		:page-size="pageSize" 
+		:total="total" 
+		:page-handler="pageHandler">
+		</zpagenav>
 	</div>
 </template>
 
@@ -85,5 +88,13 @@
 
 	.table-hover a{
 		cursor: pointer;
+	}
+
+	.tag-list:after {
+		content: '、';
+	}
+	
+	.tag-list:last-child:after {
+		content: '';
 	}
 </style>

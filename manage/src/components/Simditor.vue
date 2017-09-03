@@ -66,13 +66,8 @@ export default {
       vm.editor.on("valuechanged", function(e, src) {
         vm.content = vm.editor.getValue();
         vm.$emit('setContent', vm.content)
-        //window.localStorage.setItem('draft',JSON.stringify({title: 'demo'}));
       })//valuechanged是simditor自带获取值得方法
     }
   }
 }
 </script>
-
-<style>
-  
-</style>

@@ -11,7 +11,7 @@
 				<section class="comment-content">
 				<section class="comment-detail">
 					<section>
-						<span>{{ comment.username }}：</span>
+						<span>{{ comment.username }} ({{ comment.email }})：</span>
 						<span class="comment-at">{{ comment.create_at | dateFilter}}</span>
 						<p>{{ comment.content }}</p>
 					</section>

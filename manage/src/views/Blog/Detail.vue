@@ -6,11 +6,11 @@
 			<section>
 				<span>
 					<span class="glyphicon glyphicon-book"></span>
-					<span>category.name</span>
+					<span>{{ blog.category.name }}</span>
 				</span>
 				<span>
 					<span class="glyphicon glyphicon-tags"></span>
-					<span>tags.name</span>
+					<span v-for="tag in blog.tag" class="tag-list">{{ tag.name }}</span>
 				</span>
 				<span>
 					<span class="glyphicon glyphicon-calendar"></span>
@@ -26,7 +26,7 @@
 			<section class="comment-content">
 				<section class="comment-detail" v-for='comment in comments'>
 					<section>
-						<span>{{ comment.username }}：</span>
+						<span>{{ comment.username }} ({{ comment.email }})：</span>
 						<span class="comment-at">{{ comment.create_at }}</span>
 						<p>{{ comment.content }}</p>
 					</section>
@@ -94,5 +94,12 @@
 	}
 	.comment-content p{
 		margin-top: 5px;
+		word-break: break-all;
+	}
+	.tag-list:after {
+		content: '、';
+	}
+	.tag-list:last-chils:after {
+		content: '';
 	}
 </style>
