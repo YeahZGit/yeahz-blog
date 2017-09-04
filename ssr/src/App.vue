@@ -15,7 +15,7 @@
         </div>
         <!--搜索框-->
         <div class="search">
-          <input placeholder="搜索" type="text" v-model="word" :style="'width:'+width" class="search-text" @blur="toggleSearch">
+          <input type="text" v-model="word" :style="'width:'+width" class="search-text" @blur="toggleSearch">
           <span class="glyphicon glyphicon-search" @click="toggleSearch"></span>
         </div>
         <!--下拉菜单按钮-->
@@ -76,13 +76,13 @@
             <div class="icp">皖ICP备 17016988号</div>
           </section>
           <section class="link-logo">
-            <a target="block" href="https://www.github.com/yeahzgit">
+            <a target="_blank" href="https://www.github.com/yeahzgit">
              <img src="./pictures/github.svg" class="link-ico" title="github">
             </a>
-            <a target="block" href="https://www.zhihu.com/people/zong-zi-33-95/activities">
+            <a target="_blank" href="https://www.zhihu.com/people/zong-zi-33-95/activities">
               <img src="./pictures/zhihu.svg" class="link-ico" title="知乎">
             </a>
-            <a target="block" href="http://weibo.com/5267389299/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1">
+            <a target="_blank" href="http://weibo.com/5267389299/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1">
               <img src="./pictures/weibo.svg" class="link-ico" title="新浪微博">
             </a>
           </section>
@@ -181,6 +181,17 @@ body{
   float: left;
 }
 
+.nav-link .router-link-active {
+  color: #9ed7da;
+}
+
+.nav-link a {
+  transition: color .2s;
+}
+
+.nav-link a:hover {
+  color: #9ed7da;
+}
 .nav-link ul{
   padding: 12px 40px 0px 50px;
   margin-bottom: auto;
