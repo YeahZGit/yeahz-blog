@@ -17,7 +17,7 @@
 					</span>
 					<span>
 						<span class="glyphicon glyphicon-calendar"></span>
-						<span> {{ blog.create_at | dateFilter }}</span> 
+						<span> {{ blog.create_at | dateFilter('yyyy-MM-dd HH:mm') }}</span> 
 					</span>
 				</div>
 				<p class="paragraph">
@@ -100,17 +100,25 @@
   align-items: center;
 }
 
-.title-img{
+.title-img {
 	flex: 1;
 	height: 120px;
-	padding-right: 30px;
+	margin-right: 30px;
+	overflow: hidden;
+	cursor: pointer;
 }
 
 .title-img img{
 	border-radius: 2px;
 	width: 100%;
 	height: 100%;
+	transition: transform 1s;
 }
+
+.title-img>img:hover {
+	transform: scale(1.15);
+}
+
 
 .blog-content{
 	flex: 2;
@@ -155,7 +163,7 @@
 		flex-direction: column;
 	}
 	.title-img{
-		padding-right: 0px;
+		margin-right: 0px;
 		margin-bottom: 20px;
 		width: 90%;
 		height: 160px;

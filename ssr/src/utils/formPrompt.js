@@ -18,9 +18,9 @@ export default function(username, email, content) {
 	if(!/^[\u4e00-\u9fa5\w][- \u4e00-\u9fa5\w]{0,15}[\u4e00-\u9fa5\w]$/.test(username)) {
     return { error: true, usernamePrompt: '至少两个字符，勿使用特殊字符' }
   }
-  if(/yeahz/i.test(username)) {
-    return { error: true, usernamePrompt: '请勿使用博主名称' }
-  }
+  // if(/yeahz/i.test(username)) {
+  //   return { error: true, usernamePrompt: '请勿使用博主名称' }
+  // }
 
 	if(!email) {
 		return { error: true, emailPrompt: '请填写email' }

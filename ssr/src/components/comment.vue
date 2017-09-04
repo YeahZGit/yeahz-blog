@@ -4,7 +4,7 @@
 			<hr class="part-line"/>
 			<section class="comment-box">
 				<div>
-					<span>{{ comment.username }}：</span>
+					<span :title="comment.username">{{ comment.username | lengthFilter(8) }}：</span>
 					<span class="comment-at">{{ comment.create_at | dateFilter('yyyy/MM/dd') }}</span>
 				</div>
 				<div class="com-text">
@@ -24,7 +24,11 @@
 			</section>
 			<section class="reply-detail comment-box" v-for='reply in comment.replies'>
 				<div>
-					<span>{{ reply.username }} &nbsp 回复给： {{ reply.reply_to_name }}</span>
+					<span>
+						<span :title="reply.username">{{ reply.username | lengthFilter(8) }}</span>
+						 &nbsp 回复给： 
+						<span :title="reply.reply_to_name">{{ reply.reply_to_name | lengthFilter(8) }}</span>
+					</span>
 					<span class="comment-at">{{ reply.create_at | dateFilter('yyyy/MM/dd') }}</span>
 				</div>
 				<div class="com-text">
@@ -146,9 +150,6 @@ export default {
 @media screen and (max-width: 480px){
 	.reply-detail {
 		padding-left: 0px;
-	}
-	.add-reply {
-		visibility: visible;
 	}
 }
 </style>

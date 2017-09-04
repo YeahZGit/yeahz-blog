@@ -17,7 +17,7 @@
 					</span>
 					<span>
 						<span class="glyphicon glyphicon-calendar"></span>
-						<span> {{ blog.create_at | dateFilter }}</span> 
+						<span> {{ blog.create_at | dateFilter('yyyy-MM-dd HH:mm') }}</span> 
 					</span>
 				</div>
 				<div class="detial-paragraph" v-html="blog.content"></div>
