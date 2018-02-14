@@ -9,14 +9,15 @@ const server = Express();
 const serverBundle = require('./dist/vue-ssr-server-bundle.json');
 const clientManifest = require('./dist/vue-ssr-client-manifest.json');
 
-const renderer = 	createBundleRenderer(serverBundle, {
+const renderer = createBundleRenderer(serverBundle, {
 	template: fs.readFileSync('./src/index.template.html', 'utf-8'),
 	clientManifest,
 	basedir: resolve('./dist')
 })
 
+let isProd = process.env.NODE_ENV === 'production';
 const serve = (path, cache) => Express.static(resolve(path), {
-  maxAge: cache //&& isProd ? 1000 * 60 * 60 * 24 * 30 : 0
+  maxAge: isProd ? 1000 * 60 * 60 : 0
 })
 
 server.use('/dist', serve('./dist', true));
